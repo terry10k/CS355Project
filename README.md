@@ -1,2 +1,3 @@
 # CS355Project
-CS355 Project
+
+Check onenote for story
