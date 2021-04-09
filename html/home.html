@@ -2,6 +2,11 @@
 <html itemscope itemtype="https://schema.org/CreativeWork">
 <head>
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
   <!--
         Simple text game v0.1
         ==================
@@ -14,15 +19,22 @@
   <meta itemprop="description" name="description" property="og:description" content="Text adventure">
   <meta itemprop="name" property="og:title" content="Text-Based Adventure Game" />
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script defer src="../static/game.js"></script>
 
 
 
 
 </head>
 <body>
-<div id="wrapper">
-
+<div class="container">
+  <div id="prompt">Text</div>
+  <div id="option-buttons" class="button-grid">
+    <button class="button">Option 1</button>
+    <button class="button">Option 2</button>
+    <button class="button">Option 3</button>
+    <button class="button">Option 4</button>
+  </div>
 </div>
 </body>
 </html>
