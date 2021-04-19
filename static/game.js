@@ -3,7 +3,7 @@ const optionButtonsElement = document.getElementById('option-buttons')
 
 let state = {}
 
-function startGame() {
+function game() {
     state = {}
     showTextNode(1)
 }
@@ -33,7 +33,7 @@ function showOption(option) {
 function selectOption(option) {
     const nextTextNodeId = option.nextText
     if (nextTextNodeId <= 0) {
-        return startGame()
+        return game()
     }
     state = Object.assign(state, option.setState)
     showTextNode(nextTextNodeId)
@@ -131,4 +131,4 @@ const textNodes = [
 
 ]
 
-startGame()
+game()

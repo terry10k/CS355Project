@@ -19,14 +19,28 @@
   <meta itemprop="description" name="description" property="og:description" content="Text adventure">
   <meta itemprop="name" property="og:title" content="Text-Based Adventure Game" />
 
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="../static/game.js"></script>
-
+  <script defer src = "../static/testInventory.js"></script>
+  <script defer src = "../static/engine.js"></script>
+  <script defer src = "../static/testInventory.js"></script>
+  <script defer src = "../static/titleScreen.js"></script>
 
 
 
 </head>
 <body>
+<div id="titleScreen">
+  <div id="titleName">JOURNEY THROUGH TEAVRA</div>
+  <button id="startButton">Start Game</button>
+  <div id ="namePrompt">Welcome, stranger! What is your name?</div>
+  <div id = nameContainer></div>
+</div>
+
+
+<div id = "head"></div>
+<div id = "hud"></div>
+
 <div class="container">
   <div id="prompt">Text</div>
   <div id="option-buttons" class="button-grid">
@@ -36,5 +50,11 @@
     <button class="button">Option 4</button>
   </div>
 </div>
+<div id = "inventory">
+  <div id="inventoryTitle">Inventory</div>
+  <div id="inventoryItems"></div>
+</div>
+<div id = "footer"></div>
+
 </body>
 </html>
