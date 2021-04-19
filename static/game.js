@@ -46,6 +46,11 @@ const textNodes = [
           {
               text: "...",
               nextText: 2
+          },
+
+          {
+              text: "lmao",
+              nextText: 2
           }
       ]
 
