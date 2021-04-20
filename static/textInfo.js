@@ -1,7 +1,4 @@
-const textElement = document.getElementById('prompt')
-const optionButtonsElement = document.getElementById('option-buttons')
-
-let currentPlayer = new Player("none", 100, 100, [], 30);
+let currentPlayer = new player("none", 100, 100, [], 30);
 
 //This is the spot where we will hold the weapon that is currently being used: set at default right now
 let defaultWeapon = new weapon("none", "none",  0, "none", false, 0);
@@ -11,13 +8,15 @@ let staff = new weapon("staff", "weapon", 10, "staff", true, 1);
 let bowArrow = new weapon("bow & arrow", "weapon", 10, "bow & arrow", false, 0);
 let club = new weapon("club", "weapon", 15, "club", false, 0);
 let teeth = new weapon("teeth", "weapon", 5, "teeth", false, 0);
+let upgradedSword = new weapon("Level 2 sword", "weapon", 20, "sword", false, 0);
+let upgradedBowArrow = new weapon("Level 2 bow & arrow", "weapon", 20, "bow & arrow", false, 0);
 
 let healingPotion = new potions("healing potion", "potion", "healing", 0, true, (player.maxHP - player.currentHP), false, 0);
 //Creating Areas
 let battlefield = new area("Battlefield", 1, 0, false, false, false, [1,2,3], 0, false);
-let village = new area("Village", "You come upon a poor and desolate village. Buildings are abandoned and only a few villagers still remain. One approaches you...", 1, false, true, false, [0,5], 0, false);
-let ogreTracks = new area("Ogre Tracks End", "As you start your journey following the ogre tracks.. You get a sudden uneasy feeling. You look up and oh no! There’s an ogre straight ahead of you! It has not spotted you yet. So you still might be able to sneak past it!", 2, true, false, false, [0,4], 100, false);
-let armyCamp = new area("Army Camp", "You enter the tent of your base and find upgraded weapons and a couple of potions. But before you can grab anything… you hear a growl coming from behind you. You turn around to see a wolf behind you. Quick! Fight it off!", 3, true, false, true, [0], 100, false);
+let village = new area("Village", 12, 1, false, true, false, [0,5], 0, false);
+let ogreTracks = new area("Ogre Tracks End", 13, 2, true, false, false, [0,4], 100, false);
+let armyCamp = new area("Army Camp", 14, 3, false, false, true, [0], 50, false);
 let middleForest = new area("Middle of Forest", "You continue your trek through the forest, sometimes it seems like there is no way out. Do you continue? Or do you turn around?", 4, false, false, false, [2,5], 0, false);
 let deepForest = new area("Deep in the Forest", "As you get further and further into the forest. Soon you start hearing what sounds to be faint yelling. You begin running towards the noise in hopes that the screams could be from another soldier who is still alive. The screams lead you to an elf that looks like he could use some help.", 5, false, true, false, [1,4], 0, false);
 let elfCastle = new area("Elf Castle", "The now healed elf leads you out of the forest and to the castle in which him and all the other elves live! As you two get back to the castle, you are met with loud cheers and excitement. Excitement that seems a little bit over-the-top for just a normal elf. You question this reaction from the other elves. The king and queen elves approach you.", 6, false, true, false, [5], 0, false);
@@ -43,7 +42,9 @@ let state = {};
 
 function game(){
     state = {}
-    showTextNode(1);
+    player.inventory = [];
+    battlefield.displayInfo(battlefield.description);
+    battlefield.isVisted = true;
 
 }
 
@@ -102,8 +103,35 @@ function selectOption(option){
         }else {
             userWeapon = bowArrow;
         }
+        showTextNode(nextTextNodeId);
+    }else if(option.nextText == 112 || option.nextText == 113 || option.nextText == 114){
+        console.log(option.nextText);
+        if(option.nextText == 112){
+            village.displayInfo(village.description);
+            village.isVisted = true;
+        }else if(option.nextText === 113){
+            ogreTracks.displayInfo(ogreTracks.description);
+            ogreTracks.isVisted = true;
+        }else if(option.nextText === 114 && !armyCamp.isVisted){
+            armyCamp.calculateEnemySpawn(armyCamp.enemySpawnChance);
+            console.log(armyCamp.hasEnemyInteractions);
+            if(!armyCamp.hasEnemyInteractions){
+                console.log("yes");
+                armyCamp.setDescription(22);
+            }
+            armyCamp.displayInfo(armyCamp.description);
+            armyCamp.isVisted = true;
+        }else if(option.nextText == 114 && armyCamp.isVisted){
+            showTextNode(11);
+        }else if(option.nextText == 111){
+            currentPlayer.addItem(upgradedSword);
+            currentPlayer.addItem(upgradedBowArrow);
+            currentPlayer.addItem(healingPotion);
+            currentPlayer.displayInventory(currentPlayer.inventory);
+        }
+    }else{
+        showTextNode(nextTextNodeId);
     }
-    showTextNode(nextTextNodeId);
 }
 
 var value = localStorage.getItem("playerName");
@@ -201,16 +229,8 @@ const textNodes = [
         text: `You have chosen the sword. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
         options: [
             {
-                text: 'Go towards village',
+                text: '...',
                 nextText: 11
-            },
-            {
-                text: 'Follow the ogre tracks',
-                nextText: 12
-            },
-            {
-                text: 'Explore the army camp',
-                nextText: 13
             },
         ]
     },
@@ -219,16 +239,8 @@ const textNodes = [
     text: `You have chosen the staff. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
     options: [
             {
-                text: 'Go towards village',
+                text: '...',
                 nextText: 11
-            },
-            {
-                text: 'Follow the ogre tracks',
-                nextText: 12
-            },
-            {
-                text: 'Explore the army camp',
-                nextText: 13
             },
         ]
     },
@@ -237,32 +249,31 @@ const textNodes = [
         text: `You have chosen the bow & arrow. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
         options: [
             {
-                text: 'Go towards village',
+                text: '....',
                 nextText: 11
             },
-            {
-                text: 'Follow the ogre tracks',
-                nextText: 12
-            },
-            {
-                text: 'Explore the army camp',
-                nextText: 13
-            },
         ]
-    },
-    {
+    },{
         id: 11,
-        text: `You come upon a poor and desolate village. Buildings are abandoned and only a few villagers still remain. One approaches you...`,
+        text: 'Which do you choose?',
         options: [
             {
-                text: '...',
-                nextText: 14
+                text: 'Go to village',
+                nextText: 112
             },
+            {
+                text: 'Follow ogre tracks',
+                nextText: 113
+            },
+            {
+                text: 'Explore army camp',
+                nextText: 114
+            }
         ]
     },
     {
         id: 12,
-        text: `As you start your journey following the ogre tracks.. You get a sudden uneasy feeling. You look up and oh no! There’s an ogre straight ahead of you! It has not spotted you yet. So you still might be able to sneak past it! `,
+        text: `You come upon a poor and desolate village. Buildings are abandoned and only a few villagers still remain. One approaches you...`,
         options: [
             {
                 text: '...',
@@ -272,66 +283,86 @@ const textNodes = [
     },
     {
         id: 13,
+        text: `As you start your journey following the ogre tracks.. You get a sudden uneasy feeling. You look up and oh no! There’s an ogre straight ahead of you! It has not spotted you yet. So you still might be able to sneak past it! `,
+        options: [
+            {
+                text: '...',
+                nextText: 16
+            },
+        ]
+    },
+    {
+        id: 14,
         text: `You enter the tent of your base and find upgraded weapons and a couple of potions. But before you can grab anything… you hear a growl coming from behind you. You turn around to see a wolf behind you. Quick! Fight it off!`,
         options: [
             {
                 text: 'Start Combat',
-                nextText: 116
-            },
-        ]
-    }, 
-    {
-        id: 14,
-        text: `Villager: Oh my! Were you fighting in that battle against the ogres? We were under the impression that everyone in our army had perished. How did you survive? \n Narrator: What do you think they are going to think when you tell them the truth of what happened on that battlefield. You will be the laughingstock of what is left of this village. Do you really think telling the truth is a good idea?`,
-        options: [
-            {
-                text: 'Tell the truth',
                 nextText: 117
-            },
-            {
-                text: 'Lie',
-                nextText: 118
             },
         ]
     }, 
     {
         id: 15,
+        text: `Villager: Oh my! Were you fighting in that battle against the ogres? We were under the impression that everyone in our army had perished. How did you survive? \n Narrator: What do you think they are going to think when you tell them the truth of what happened on that battlefield. You will be the laughingstock of what is left of this village. Do you really think telling the truth is a good idea?`,
+        options: [
+            {
+                text: 'Tell the truth',
+                nextText: 118
+            },
+            {
+                text: 'Lie',
+                nextText: 119
+            },
+        ]
+    }, 
+    {
+        id: 16,
         text: 'Which do you choose?',
         options:[
             {
                 text: 'Sneak',
-                nextText: 119
+                nextText: 120
             },
             {
                 text: 'Fight',
-                nextText: 120
+                nextText: 121
             }
         ]
     },
     {
-        id: 16,
+        id: 17,
         text: 'Combat - to be continued',
         nextText: -1
     },
     {
-        id: 17,
+        id: 18,
         text: 'truth chance - to be continued',
         nextText: -1
     },
     {
-        id: 18,
+        id: 19,
         text: 'lie chance - to be continued',
         nextText: -1
     },
     {
-        id: 19,
+        id: 20,
         text: 'sneak chance - to be continued',
         nextText: -1
     },
     {
-        id: 20,
+        id: 21,
         text: 'combat - to be continued',
         nextText: -1
+    },
+    {
+        id: 22,
+        text: 'You enter the tent of your base and find upgraded weapons and a couple of potions. You recieve an upgraded sword, an upgraded bow & arrow, and a healing potion.',
+        options:[
+            {
+            text: 'Go back',
+            nextText: 111
+            },
+        ]
     },
     {
         id: 98,
