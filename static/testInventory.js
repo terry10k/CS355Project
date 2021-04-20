@@ -3,19 +3,19 @@ const inventoryElement = document.getElementById('inventoryItems')
 const  items = [
     {
         id: 100,
-        text: "a",
+        text: "Potion of Healing",
         count: 1
     },
 
     {
         id: 101,
-        text: "b",
+        text: "Sword",
         count: 2
     },
 
     {
         id: 102,
-        text: "c",
+        text: "Potion of Mana",
         count: 5
     }
 ]
@@ -28,11 +28,8 @@ function displayInventory() {
         btn = document.createElement("button")
         btn.setAttribute("class", "itemButton")
         itemName = document.createTextNode(items[i].text);
-        btn.append(itemName);
-        console.log(btn)
-        itemCount = document.createTextNode(items[i].count);
-        btn.append (itemCount);
-        console.log(btn)
+        btn.append(itemName); 
+
         inventoryElement.appendChild(btn);
 
 

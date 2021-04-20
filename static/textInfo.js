@@ -1,4 +1,7 @@
-let currentPlayer = new player("none", 100, 100, [], 30);
+const textElement = document.getElementById('prompt')
+const optionButtonsElement = document.getElementById('option-buttons')
+
+let currentPlayer = new Player("none", 100, 100, [], 30);
 
 //This is the spot where we will hold the weapon that is currently being used: set at default right now
 let defaultWeapon = new weapon("none", "none",  0, "none", false, 0);

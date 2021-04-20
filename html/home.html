@@ -20,12 +20,22 @@
   <meta itemprop="name" property="og:title" content="Text-Based Adventure Game" />
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="../static/game.js"></script>
+
   <script defer src = "../static/testInventory.js"></script>
-  <script defer src = "../static/engine.js"></script>
-  <script defer src = "../static/testInventory.js"></script>
+
+  <script defer src = "../static/Player.js"></script>
+  <script defer src = "../static/area.js"></script>
+  <script defer src = "../static/Enemy.js"></script>
+  <script defer src = "../static/npc.js"></script>
+  <script defer src = "../static/item.js"></script>
+  <script defer src = "../static/potions.js"></script>
+  <script defer src = "../static/weapon.js"></script>
   <script defer src = "../static/titleScreen.js"></script>
+  <script defer src="../static/game.js"></script>
+
+  <!--
   <script defer src = "../static/combat.js"></script>
+  -->
 
 
 
@@ -40,7 +50,9 @@
 
 
 <div id = "head"></div>
-<div id = "hud"></div>
+<div id = "hud">
+  <div id="hudTitle">Turuu</div>
+</div>
 
 <div class="container">
   <div class="combatContainer"></div>

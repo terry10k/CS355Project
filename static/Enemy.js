@@ -1,5 +1,5 @@
 class Enemy{
-	var enemyType = {"wolf", "giant spider", "ogre", "bandit", "necromancer"};
+	enemyType = ["wolf", "giant spider", "ogre", "bandit", "necromancer"];
 	name;
 	attackStrength;
 	health;

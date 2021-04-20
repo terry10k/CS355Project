@@ -2,8 +2,7 @@ const startButton = document.getElementById('startButton')
 const titleScreen = document.getElementById('titleScreen')
 const nameContainer = document.getElementById('nameContainer')
 const namePrompt = document.getElementById('namePrompt')
-
-
+var playerName;
 
 function startGame() {
     startButton.remove()
@@ -33,7 +32,9 @@ function hideTitle() {
     playerName = document.getElementById("nameBox").value
     titleScreen.style.display = "none";
     //add animations
+    document.getElementById('hudTitle').innerHTML = playerName
     console.log(playerName) //replace playername with this
+    game()
 }
 
 startButton.onclick = startGame

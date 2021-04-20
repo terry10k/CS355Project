@@ -3,8 +3,8 @@ class Player{
 	attackStrength;
 	mana;
 	health;
-	let inventory = {};
-	let states = {}
+	inventory = {};
+	states = {}
 
 	constructor(name){
 		this.name = name;
@@ -12,6 +12,7 @@ class Player{
 		this.mana = 50;
 		this.health = 100;
 	}
+
 
 	getName(){
 		return this.name;
@@ -57,7 +58,7 @@ class Player{
 		}
 
 		if(found ==  false){
-			inventory.push([item.getType()], item.getName(), 1]);
+			inventory.push([item.getType()], item.getName(), 1);
 		}
 	}
 
@@ -87,7 +88,7 @@ class Player{
 	}
 
 	addState(key, value){
-		states.push(key:value);
+		states.push(key, value);
 	}
 
 	removeState(stateEntry){
