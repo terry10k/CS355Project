@@ -16,7 +16,6 @@ function startGame() {
     nameContainer.style.display = "flex"
 
 
-
     confirmBtn = document.createElement("button")
     confirmBtn.setAttribute("type", "button")
     confirmBtn.setAttribute("id", "confirmBtn")

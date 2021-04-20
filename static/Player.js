@@ -13,7 +13,6 @@ class Player{
 		this.health = 100;
 	}
 
-
 	getName(){
 		return this.name;
 	}

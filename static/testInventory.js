@@ -20,6 +20,7 @@ const  items = [
     }
 ]
 
+
 function displayInventory() {
     var i;
 

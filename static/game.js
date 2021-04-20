@@ -11,7 +11,6 @@ let staff = new weapon("staff", "weapon", 10, "staff", true, 1);
 let bowArrow = new weapon("bow & arrow", "weapon", 10, "bow & arrow", false, 0);
 
 
-
 function game() {
     state = {}
     currentPlayer = new Player(playerName)
