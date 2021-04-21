@@ -2,6 +2,8 @@ const startButton = document.getElementById('startButton')
 const titleScreen = document.getElementById('titleScreen')
 const nameContainer = document.getElementById('nameContainer')
 const namePrompt = document.getElementById('namePrompt')
+
+
 var playerName;
 
 function startGame() {
@@ -14,6 +16,7 @@ function startGame() {
 
     namePrompt.style.display ="block"
     nameContainer.style.display = "flex"
+
 
 
     confirmBtn = document.createElement("button")
@@ -31,12 +34,7 @@ function hideTitle() {
     playerName = document.getElementById("nameBox").value
     titleScreen.style.display = "none";
     //add animations
-    document.getElementById('hudTitle').innerHTML = playerName
     console.log(playerName) //replace playername with this
-    game()
+    localStorage.setItem("playerName", playerName);
 }
-
 startButton.onclick = startGame
-
-
-
