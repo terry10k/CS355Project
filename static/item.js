@@ -1,34 +1,31 @@
 class item  {
     /**
-     * Constructs generic item instance 
+     * Constructs generic item instance
      * itemName - optional name of item
-     * genericType - generic type of item (potion, weapon)
-     * strength - Amount of strength the item adds to the player 
+     * strength - Amount of strength the item adds to the player
      */
-    constructor(itemName, genericType, strength){
+    constructor(itemName){
         this.itemName = itemName;
-        this.genericType = genericType;
-        this.strength = strength;
     }
-    
+
     //Displays basic item information
     displayDescription(){
-        `This is a ${this.genericType} that has ${strength}.`
+        `This is a ${this.itemName}.`
     }
 
-    //Gets name
-    getName(){
+    //Returns item name
+    getItemName(){
         return this.itemName;
     }
-    
-    //Gets strength
-    getStrength(){
-        return this.strength;
+
+    //Sets the item name
+    setItemName(itemName){
+      this.itemName = itemName;
     }
 
-    //Gets type
-    getGenericType(){
-        return this.genericType;
+    //Returns generic item/object type
+    getItemType(){
+      return "item";
     }
 
 }

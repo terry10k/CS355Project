@@ -1,32 +1,25 @@
 class weapon extends item{
     /**
      * Constructs weapon instance
-     * name - optional name of weapon
-     * genericType - generic type (ex. weapon, potion, etc)
+     * name - Name of weapon
      * strength - Strength that weapon adds to the player
      * weaponType - Specific type of weapon(ex. sword, staff, bow & arrow)
-     * isMage - boolean that checks if the weapon is mage
-     * manaCost - number of the amount of mana that using mage weapon's cost
+     * manaCost - mana cost per attack (set to 0 if not magic type weapon)
      */
-    constructor(name, genericType, strength, weaponType, isMage = false, manaCost){
-        super(name, genericType, strength);
+    constructor(name, strength, weaponType, manaCost){
+        super(name);
         this.weaponType = weaponType;
         this.strength = strength;
-        this.isMage = isMage;
         this.manaCost = manaCost;
     }
 
-    //Checks weapon type and makes that weapon the user's current weapon
-    useWeapon(){
-        if(weaponType === "sword"){
-            userWeapon = sword;
-        }else if(weaponType === "staff"){
-            userWeapon = staff;
-        }else if(weaponType === "bow & arrow"){
-            userWeapon = bowArrow;
-        }else{
-            //Room for expansion
-        }
+    /**
+     * Deducts mana cost from player - possibly add other stuff
+     * Parameters:
+     * player: a player object
+     */
+    useWeapon(player){
+        player.setCurrentMana(player.getCurrentMana() - manaCost);
     }
 
     //Get type of weapon
@@ -37,6 +30,16 @@ class weapon extends item{
     //Get mana cost of weapon
     getManaCost(){
         return this.manaCost;
+    }
+
+    //Set mana cost of weapon
+    setManaCost(manaCost){
+      this.manaCost = manaCost;
+    }
+
+    //Returns generic item/object type
+    getItemType(){
+      return "weapon";
     }
 
 }
