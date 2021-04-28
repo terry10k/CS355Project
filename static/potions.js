@@ -26,33 +26,37 @@ class potions extends item{
     usePotion(player){
         if(this.potionType === "healing"){
           //if using a healing potion would excede max health limit
-          if(player.getCurrentHP() + hpIncrease >= player.getMaxHP()){
+          if(player.getCurrentHP() + this.hpIncrease >= player.getMaxHP()){
             //set player's current health to max
             player.setCurrentHP(player.getMaxHP());
           }
           else{
-            player.setCurrentHP(player.getCurrentHP() + hpIncrease);
+            player.setCurrentHP(player.getCurrentHP() + this.hpIncrease);
           }
         } //end of healing clause
 
         else if(this.potionType === "mana"){
           //if using a mana potion would excede max mana limit
-          if(player.getCurrentMana() + manaIncrease >= player.getMaxMana()){
+          if(player.getCurrentMana() + this.manaIncrease >= player.getMaxMana()){
             //set player's current mana to max
             player.setCurrentMana(player.getMaxMana());
           }
           else{
-            player.setCurrentMana(player.getCurrentMana() + manaIncrease);
+            player.setCurrentMana(player.getCurrentMana() + this.manaIncrease);
           }
         }//end of mana clause
 
         else if(this.potionType === "strength"){
-            player.setAttackStrength(player.getAttackStrength() + strengthIncrease);
+            player.setAttackStrength(player.getAttackStrength() + this.strengthIncrease);
         }//end of strength clause
 
+
+        player.displayStats()
         /* Room for expansion
         else{
         }*/
+
+
     }//end of use potion function
 
     //Returns generic item/object type
@@ -63,13 +67,13 @@ class potions extends item{
     //Returns a string with a description of the item
     displayDescription(){
         if(this.potionType == "healing"){
-          return "Consuming this healing potion will heal you for ${this.hpIncrease} health.";
+          return `Consuming this healing potion will heal you for ${this.hpIncrease} health.`;
         }
         else if (this.potionType == "mana"){
-          return "Consuming this mana potion will replenish ${this.manaIncrease} mana.";
+          return `Consuming this mana potion will replenish ${this.manaIncrease} mana.`;
         }
         else if(this.potionType == "strength"){
-          return "Consuming this strength potion will increase your attack strength by ${this.strengthIncrease}.";
+          return `Consuming this strength potion will increase your attack strength by ${this.strengthIncrease}.`;
         }
     }
 }

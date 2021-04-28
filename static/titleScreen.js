@@ -27,14 +27,20 @@ function startGame() {
 
     //this has to be here because its dynamically added
     document.getElementById("confirmBtn").onclick = hideTitle
+
 }
 
 
 function hideTitle() {
-    playerName = document.getElementById("nameBox").value
+    playerName = document.getElementById("nameBox").value;
     titleScreen.style.display = "none";
     //add animations
-    console.log(playerName) //replace playername with this
+    //console.log(playerName); //replace playername with this
     localStorage.setItem("playerName", playerName);
+    document.getElementById('hudTitle').innerHTML = playerName;
+
+    game()
 }
+
+
 startButton.onclick = startGame

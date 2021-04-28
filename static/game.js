@@ -10,13 +10,25 @@ let sword = new weapon("sword", "weapon", 10, "sword", false, 0);
 let staff = new weapon("staff", "weapon", 10, "staff", true, 1);
 let bowArrow = new weapon("bow & arrow", "weapon", 10, "bow & arrow", false, 0);
 
+let currentPlayer = new Player(playerName);
 
 function game() {
     state = {}
     currentPlayer = new Player(playerName)
-
+    currentPlayer.setCurrentHP(10)
+    currentPlayer.setCurrentMana(5)
     showTextNode(1)
+    //console.log(currentPlayer.getMaxHP())
+    currentPlayer.displayStats()
 
+
+
+    currentPlayer.addInventory(new potions("Healing Potion", "healing"))
+    currentPlayer.addInventory(new potions("Mana Potion", "mana"))
+    currentPlayer.addInventory(new potions("Healing Potion", "healing"))
+
+    displayInventory()
+    //console.log(currentPlayer.getInventory())
 }
 
 function showTextNode(textNodeIndex) {
@@ -62,7 +74,7 @@ function selectOption(option){
 }
 
 
-const textNodes = [
+var textNodes = [
     {
         id: 1,
         text: 'Years ago the country of Teavra was a beautiful society. A country full of lush forests and alluring nature. A country where different groups could live in unison, free from harm. However, one night a darkness was casted over the country, groups turned hostile and the beautiful scenery that once was Teavra was now dull and frightful.',
@@ -124,7 +136,7 @@ const textNodes = [
     {
         id: 6,
         //this doesn't work for some reason have to change it later
-        text: document.getElementById('hudTitle').textContent + `? Figured a weakling like you would have a name like that. Now let’s get this mission over with. Where do you think we should go first?`,
+        text: `${currentPlayer.getName()} ? Figured a weakling like you would have a name like that. Now let’s get this mission over with. Where do you think we should go first?`,
         options: [
             {
                 text: '...',

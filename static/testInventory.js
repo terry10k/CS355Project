@@ -1,52 +1,31 @@
-const inventoryElement = document.getElementById('inventoryItems')
-
-const  items = [
-    {
-        id: 100,
-        text: "Potion of Healing",
-        count: 1
-    },
-
-    {
-        id: 101,
-        text: "Sword",
-        count: 2
-    },
-
-    {
-        id: 102,
-        text: "Potion of Mana",
-        count: 5
-    }
-]
-
-
 function displayInventory() {
     var i;
 
-    var btn
-    for (i = 0; i < items.length; i++) {
-        btn = document.createElement("button")
-        btn.setAttribute("class", "itemButton")
-        itemName = document.createTextNode(items[i].text);
-        btn.append(itemName); 
-
-        inventoryElement.appendChild(btn);
+    inventory = currentPlayer.getInventory()
 
 
+
+    for (i = 0; i < inventory.length; i++) {
+        $(`#inventoryItem${i+1}`).append($('<div>').prop({id: 'inventoryItem', innerHTML: `${inventory[i][0].getItemName()}`,}));
+        $(`#inventoryItem${i+1}`).append($('<div>').prop({id: 'count', innerHTML: `${inventory[i][1]}`,}));
+        $(`#inventoryItem${i+1}`).click(use(inventory[i][0], currentPlayer))
+
+
+
+
+       // inventoryItem = document.getElementById(`#inventoryItem${i+1}`)
+       // inventoryItem.onclick = use(inventory, i)
     }
 
-    var itemButtons =document.getElementsByClassName("itemButton")
 
-    for (i = 0; i < itemButtons.length; i++) {
-        itemButtons[i].onclick = use
-    }
-}
 
-function use() {
-    console.log("test")
-    //use item lol
+
+
 
 }
 
-displayInventory()
+function use(item, player){
+    item.usePotion(player);
+
+}
+

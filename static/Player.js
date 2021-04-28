@@ -6,7 +6,7 @@ class Player{
 	maxMana;				 //player's max max (int)
 	currentHP;			 // player'current health (int)
 	maxHP;					 // player's max health (int)
-	inventory = {};	 //players inventory - each entry has the format of: [item object, number of items]
+	inventory = [];	 //players inventory - each entry has the format of: [item object, number of items]
 	states = {}			 //player states - each entry has format of: "state_name":boolean_Value
 
 /**
@@ -18,9 +18,9 @@ class Player{
 		this.name = name;
 		this.baseAttack = 8;
 		this.maxMana = 50;
-		this.currentMana = maxMana;
-		this.maxHp = 100;
-		this.currentHP = maxHP
+		this.currentMana = this.maxMana;
+		this.maxHP = 100;
+		this.currentHP = this.maxHP
 	}
 
 	//Returns the name of the player
@@ -75,7 +75,7 @@ class Player{
 
 	//Returns player's current health
 	getCurrentHP(){
-		return currentHP;
+		return this.currentHP;
 	}
 
 	//Sets player's current health to a new value (int)
@@ -95,7 +95,7 @@ class Player{
 
 	//Returns the whole inventory array
 	getInventory(){
-		return inventory;
+		return this.inventory;
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Player{
 		var found = false;
 		for(var i = 0; i < inventory.length; i++){
 			//if the player already has another item of the same type in the inventory, increment amount
-			if(inventory[i][0].getItemName() == item.getItemName){
+			if(inventory[i][0].getItemName() == item.getItemName()){
 				found = true;
 				inventory[i][1] = inventory[i][1] + 1;
 				break;
@@ -115,7 +115,7 @@ class Player{
 		}
 		//if player does not already have this item in inventory, add item
 		if(found ==  false){
-			inventory.push([item, 1]);
+			this.inventory.push([item, 1]);
 		}
 	}
 
@@ -171,4 +171,16 @@ class Player{
 	searchState(stateEntry){
 		return states.stateEntry;
 	}
+
+    displayStats() {
+        $("#health").text(`Health: ${currentPlayer.getCurrentHP()}/${currentPlayer.getMaxHP()}`)
+        $('.hpBar span').width(currentPlayer.getCurrentHP() + "%");
+
+        $("#mana").text(`Mana: ${currentPlayer.getCurrentMana()}/${currentPlayer.getMaxMana()}`)
+        $('.manaBar span').width(currentPlayer.getCurrentMana()*2 + "%");
+
+        //fix this later for weapons
+        //$("#atk").text(`Attack Strength: ${currentPlayer.getAttackStrength()}`)
+    }
+
 }

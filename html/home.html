@@ -21,8 +21,6 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-  <script defer src = "../static/testInventory.js"></script>
-
   <script defer src = "../static/Player.js"></script>
   <script defer src = "../static/area.js"></script>
   <script defer src = "../static/Enemy.js"></script>
@@ -31,7 +29,9 @@
   <script defer src = "../static/potions.js"></script>
   <script defer src = "../static/weapon.js"></script>
   <script defer src = "../static/titleScreen.js"></script>
+
   <script defer src="../static/game.js"></script>
+  <script defer src = "../static/testInventory.js"></script>
 
   <!--
   <script defer src = "../static/combat.js"></script>
@@ -51,7 +51,34 @@
 
 <div id = "head"></div>
 <div id = "hud">
-  <div id="hudTitle">Turuu</div>
+  <div id="hudTitle"></div>
+  <div id="hudPicture">
+
+  </div>
+
+  <div id="hudStats">
+    <div id="health">
+      hp
+    </div>
+    <div class="hpBar">
+      <span style="width: 0%"></span>
+    </div>
+
+
+    <div id="mana">
+      mana
+    </div>
+    <div class="manaBar">
+      <span style="width: 0%"></span>
+    </div>
+
+    <div id="atk">
+      atk
+    </div>
+
+  </div>
+</div>
+
 </div>
 
 <div class="container">
@@ -70,7 +97,18 @@
 
 <div id = "inventory">
   <div id="inventoryTitle">Inventory</div>
-  <div id="inventoryItems"></div>
+  <div id="inventoryItems">
+    <div id="inventoryItem1"></div>
+    <div id="inventoryItem2"></div>
+    <div id="inventoryItem3"></div>
+    <div id="inventoryItem4"></div>
+    <div id="inventoryItem5"></div>
+    <div id="inventoryItem6"></div>
+    <div id="inventoryItem7"></div>
+    <div id="inventoryItem8"></div>
+    <div id="inventoryItem9"></div>
+    <div id="inventoryItem10"></div>
+  </div>
 </div>
 <div id = "footer"></div>
 
