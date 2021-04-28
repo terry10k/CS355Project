@@ -27,6 +27,15 @@ class weapon extends item{
         return this.weaponType;
     }
 
+    //Returns the weapon's strength
+    getStrength(){
+      return this.strength;
+    }
+
+    //Sets the strength of the weapon to a new value (int)
+    setStrength(strength){
+      this.strength = strength;
+    }
     //Get mana cost of weapon
     getManaCost(){
         return this.manaCost;
@@ -40,6 +49,11 @@ class weapon extends item{
     //Returns generic item/object type
     getItemType(){
       return "weapon";
+    }
+
+    //Returns a string with a description of the item
+    displayDescription(){
+        return '${this.itemName} attacks for ${strength} damage.';
     }
 
 }

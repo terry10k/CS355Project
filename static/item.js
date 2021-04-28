@@ -8,9 +8,9 @@ class item  {
         this.itemName = itemName;
     }
 
-    //Displays basic item information
+    //Returns a string with a description of the item
     displayDescription(){
-        `This is a ${this.itemName}.`
+        return 'This is a ${this.itemName}.';
     }
 
     //Returns item name

@@ -1,6 +1,7 @@
 class Player{
 	name;						 //player's name (String)
-	attackStrength;  //player's damage (int)
+	baseAttack;			//player's base attack strength (without weapons) (int)
+	currentWeapon;	//current weapon user is using (weapon object)
 	currentMana;		 //player's current mana (int)
 	maxMana;				 //player's max max (int)
 	currentHP;			 // player'current health (int)
@@ -15,7 +16,7 @@ class Player{
  */
 	constructor(name){
 		this.name = name;
-		this.attackStrength = 8;
+		this.baseAttack = 8;
 		this.maxMana = 50;
 		this.currentMana = maxMana;
 		this.maxHp = 100;
@@ -27,14 +28,29 @@ class Player{
 		return this.name;
 	}
 
-	//Returns the attack strength of the player
-	getAttackStrength(){
-		return this.attackStrength
+	//Returns the base attack strength of the player
+	getBaseAttack(){
+		return this.baseAttack;
 	}
 
-	//Sets attack strength of player to a new value (int)
-	setAttackStrength(attackStrength){
-		this.attackStrength = attackStrength;
+	//Sets base attack strength of player to a new value (int)
+	setBaseAttack(baseAttack){
+		this.baseAttack = baseAttack;
+	}
+
+	//Returns the weapon the player is currently using
+	getCurrentWeapon(){
+		return this.currentWeapon;
+	}
+
+	//Set current weapon the player is using to a new weapon (weapon object)
+	setCurrentWeapon(currentWeapon){
+		this.currentWeapon = currentWeapon;
+	}
+
+	//Returns the player's total attack strength (weapon + base)
+	getCurrentAttack(){
+		return (this.baseAttack + this.currentWeapon.getStrength());
 	}
 
 	//Returns player's max possible mana
