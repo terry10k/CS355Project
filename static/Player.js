@@ -105,11 +105,11 @@ class Player{
 	 */
 	addInventory(item){
 		var found = false;
-		for(var i = 0; i < inventory.length; i++){
+		for(var i = 0; i < this.inventory.length; i++){
 			//if the player already has another item of the same type in the inventory, increment amount
-			if(inventory[i][0].getItemName() == item.getItemName()){
+			if(this.inventory[i][0].getItemName() == item.getItemName()){
 				found = true;
-				inventory[i][1] = inventory[i][1] + 1;
+				this.inventory[i][1] = this.inventory[i][1] + 1;
 				break;
 			}
 		}
@@ -117,6 +117,8 @@ class Player{
 		if(found ==  false){
 			this.inventory.push([item, 1]);
 		}
+
+		//probably put displayinventory here
 	}
 
 	/**
@@ -125,16 +127,17 @@ class Player{
 	 * item: item object to remove
 	 */
 	removeInventory(item){
-		for(var i = 0; i < inventory.length; i++){
+		for(var i = 0; i < this.inventory.length; i++){
 			//if item to remove is found
-			if(inventory[i][0].getitemName() == item.getItemName()){
-				inventory[i][1] = inventory[i][1] - 1; //decrement amount
-				if(inventory[i][1] == 0){ //if item amount is 0
-					inventory.splice(i, 1); //remove entry from array
+			if(this.inventory[i][0].getitemName() == item.getItemName()){
+				this.inventory[i][1] = this.inventory[i][1] - 1; //decrement amount
+				if(this.inventory[i][1] == 0){ //if item amount is 0
+					this.inventory.splice(i, 1); //remove entry from array
 				}
 				break;
 			}
 		}
+		//put displayinventory here as well
 	}
 
 /**

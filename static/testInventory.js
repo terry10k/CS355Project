@@ -4,12 +4,16 @@ function displayInventory() {
     inventory = currentPlayer.getInventory()
 
 
-
     for (i = 0; i < inventory.length; i++) {
-        $(`#inventoryItem${i+1}`).append($('<div>').prop({id: 'inventoryItem', innerHTML: `${inventory[i][0].getItemName()}`,}));
+        item = inventory[i][0]
+        $(`#inventoryItem${i+1}`).append($('<div>').prop({id: 'inventoryItem', innerHTML: `${item.getItemName()}`,}));
         $(`#inventoryItem${i+1}`).append($('<div>').prop({id: 'count', innerHTML: `${inventory[i][1]}`,}));
-        $(`#inventoryItem${i+1}`).click(use(inventory[i][0], currentPlayer))
 
+
+        //you have to pass stuff into function()
+
+        $(`#inventoryItem${i+1}`).click(function( item ){ use(item,currentPlayer); })
+        console.log(item)
 
 
 
@@ -24,8 +28,8 @@ function displayInventory() {
 
 }
 
-function use(item, player){
-    item.usePotion(player);
-
+function use(){
+    console.log(item)
+    item.usePotion(currentPlayer)
 }
 
