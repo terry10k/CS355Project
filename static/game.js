@@ -1,6 +1,7 @@
 const textElement = document.getElementById('prompt')
 const optionButtonsElement = document.getElementById('option-buttons')
 
+
 let state = {}
 
 //This is the spot where we will hold the weapon that is currently being used: set at default right now

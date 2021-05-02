@@ -30,6 +30,13 @@ body {
     background-size: contain;
 }
 
+#headTitle{
+    padding: 1.35em;
+    font-size: 40px;
+    color: white;
+    text-align: center;
+}
+
 #hud {
     width: 15%;
     height: 60%;
