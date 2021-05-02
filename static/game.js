@@ -57,7 +57,8 @@ function selectOption(option){
     //CHANGE HERE FOR GOING FROM CREATING AREAS TO SHOWING TEXT NODES TO BATTLES ETC.
     const nextTextNodeId = (option.nextText % 100);
     if(nextTextNodeId <= 0){
-        return game();
+        //return game();
+        document.location.reload(true);
     }
     state = Object.assign(state, option.setState);
     if(option.nextText > 107 && option.nextText < 111){
@@ -322,4 +323,3 @@ var textNodes = [
 
 
 ]
-

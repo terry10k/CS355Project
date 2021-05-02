@@ -25,6 +25,9 @@ body {
     width: 100%;
     height: 20%;
     background-color: lightgoldenrodyellow;
+    background-image: url('StartBackground.png');
+    background-repeat: repeat-x;
+    background-size: contain;
 }
 
 #hud {
@@ -87,6 +90,9 @@ body {
     width: 100%;
     height: 20%;
     background-color: lightgray;
+    background-image: url('Footer.png');
+    background-repeat: repeat-x;
+    background-size: contain;
 }
 
 #prompt {
@@ -142,6 +148,10 @@ body {
     height: 100%;
     width: 100%;
     background-color: black;
+    background-image: url('StartBackground.png');
+    background-position: center;
+    background-repeat: repeat-x;
+    background-size: contain;
     color: white;
     position: absolute;
     z-index: 100;
