@@ -90,7 +90,7 @@ function randomizeCombat(path1, path2, percentage){
 
 function game(){
     state = {}
-    
+
     var value = localStorage.getItem("playerName");
     currentPlayer = new Player(value);
     currentPlayer.displayStats();
@@ -135,7 +135,7 @@ function selectOption(option){
     const nextTextNodeId = (option.nextText % 100);
     console.log(currentPlayer.getInventory());
     if(nextTextNodeId <= 0){
-        return game();
+        document.location.reload();
     }
     state = Object.assign(state, option.setState);
     if(option.nextText > 107 && option.nextText < 111){
@@ -456,7 +456,7 @@ const textNodes = [
                 nextText: 117
             },
         ]
-    }, 
+    },
     {
         id: 15,
         text: `Villager: Oh my! Were you fighting in that battle against the ogres? We were under the impression that everyone in our army had perished. How did you survive? \n Narrator: What do you think they are going to think when you tell them the truth of what happened on that battlefield. You will be the laughingstock of what is left of this village. Do you really think telling the truth is a good idea?`,
@@ -470,7 +470,7 @@ const textNodes = [
                 nextText: 119
             },
         ]
-    }, 
+    },
     {
         id: 16,
         text: 'Which do you choose?',
@@ -521,7 +521,7 @@ const textNodes = [
         options:[
             {
                 text: 'Continue on...',
-                nextText: 128 
+                nextText: 128
             }
         ]
     },
@@ -909,7 +909,7 @@ const textNodes = [
         ]
     },
     {
-        id: 55, 
+        id: 55,
         text: `You: Did the wizard tell you I was coming? \n\n "Blacksmith: Of course he did young soldier! Here, have your pick of one of the three strongest weapons I have to offer!`,
         options:[
             {
@@ -945,7 +945,7 @@ const textNodes = [
                 nextText: 59
             }
         ]
-    },    
+    },
     {
         id: 58,
         text: `Blacksmith: Ah, the Bow & Arrow. Good choice! Before you go, I must give you one piece of advice. Your weapons are only as strong as the person who is weilding them. Embrace your strength. \n\n Voice: Howwwwwwwwww inspirational. Let's get out of here before I have to listen to another thing this blacksmith says.`,
@@ -1031,7 +1031,7 @@ const textNodes = [
         ]
     },
     {
-        id: 66, 
+        id: 66,
         text: `You: Did the elf queen tell you I was coming? \n\n "Potion Master: Of course she did young soldier! Here, have your pick of one of the three strongest potions I have to offer!`,
         options:[
             {
@@ -1067,7 +1067,7 @@ const textNodes = [
                 nextText: 59
             }
         ]
-    },    
+    },
     {
         id: 69,
         text: `Potion Master: Ah, Super Strength. Good choice! Before you go, I must give you one piece of advice. Even the strongest of warriors still need to use potions, do not let the use of potions make you feel weaker than others. Embrace your strength.\n\n Voice: Howwwwwwwwww inspirational. Let's get out of here before I have to listen to another thing this potion brewer says.`,
@@ -1087,14 +1087,14 @@ const textNodes = [
         }]
     },
     {
-        id: 88, 
+        id: 88,
         text: `You have successfully killed Malikai! But, as Malikai lays there, you hear him mutter some final words. \n\n Malikai: Thank... you... I... am... finally rid... of this... awful voice... \n\n Suddenly, you realize something. You remember on the battlefield the day those ogres attacked. Right before they began their first move, they hesitated as if they did not want to take part in what they were about to do. Something clicks in your head. The orges were led by a voice. The voice Malikai was talking abbout. The voice that is currently in your own head.`,
         options:[
             {
                 text: 'Confront the voice',
                 nextText: 62
             }
-        ] 
+        ]
     },
     {
         id: 89,
@@ -1150,7 +1150,7 @@ const textNodes = [
                 nextText: 29
             }
         ]
-    },   
+    },
      {
         id: 95,
         text: `You have successfully beating the ogre! \n\n Voice: Wow, I did not think you had that in you. I was expecting you to die within seconds. Well, let's keep moving I guess.`,
@@ -1203,8 +1203,8 @@ const textNodes = [
             },
         ]
     },
-     
-    
+
+
 ]
 
 game()
