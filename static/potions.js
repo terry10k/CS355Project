@@ -59,7 +59,7 @@ class potions extends item{
         }
 
         else if(this.potionType === "super strength"){
-            player.setAttackStrength(player.getBaseAttack() + this.strengthIncrease * 2);
+            player.setBaseAttack(player.getBaseAttack() + this.strengthIncrease * 2);
         }
 
         player.displayStats()

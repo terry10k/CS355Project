@@ -6,6 +6,7 @@ class Enemy{
 	deathStatus;
 	dropChance;
 	dropItem;
+	gif = ["../assets/hell-hound-idle.gif", "", "../assets/ork.gif", "../assets/knight idle.gif", "../assets/wizard.gif"];
 
 
 	/* Creates an instance of an enemy object

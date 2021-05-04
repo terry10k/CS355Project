@@ -48,9 +48,10 @@ var potionMaster = new area("Potion Master's",65,false, 0, false);
 var wolf = new Enemy(currentPlayer, "none", false, 0.7, false);
 var ogre = new Enemy(currentPlayer, "none", false, 1.2, false);
 var randomEnemy = new Enemy(currentPlayer, "none", 0.5, 0, false);
-var malikai = new Enemy(currentPlayer, "none", false, 0.9, false);
-var voice = new Enemy(currentPlayer, "none", false, 1.0, false);
-var randomEnemyName = "";
+var malikai = new Enemy(currentPlayer, "none", false, 1.4, false);
+var voice = new Enemy(currentPlayer, "none", false, 1.5, false);
+var elf = new Enemy(currentPlayer, "none", false, 0.9, false);
+var wizard = new Enemy(currentPlayer, "none", false, 0.6, false);
 
 var state = {};
 
@@ -146,7 +147,7 @@ function selectOption(option){
             village.displayInfo(village.description);
             village.isVisted = true;
         }else if(option.nextText === 113){
-            ogre = new Enemy(currentPlayer, "ogre", false, 2, true);
+            combat(currentPlayer, ogre, 11, 95, 98);
             ogreTracks.displayInfo(ogreTracks.description);
             ogreTracks.isVisted = true;
         }else if(option.nextText === 114 && !armyCamp.isVisted){
@@ -154,7 +155,7 @@ function selectOption(option){
             if(!armyCamp.hasEnemyInteractions){
                 armyCamp.setDescription(22);
             }else{
-                wolf = new Enemy(currentPlayer, "wolf", false, 1, false);
+
             }
             armyCamp.displayInfo(armyCamp.description);
             armyCamp.isVisted = true;
@@ -167,7 +168,6 @@ function selectOption(option){
             showTextNode(nextTextNodeId);
         }else if(option.nextText == 128){
             randomEnemy = new Enemy(currentPlayer, "random", true, 0.3, true);
-            randomEnemyName = randomEnemy.getName();
             startForest.isVisted = true;
             startForest.displayInfo(startForest.description);
         }else if(option.nextText == 129){
@@ -190,7 +190,6 @@ function selectOption(option){
             insideTower.displayInfo(insideTower.description);
         }else if(option.nextText == 145 && !storageRoom.isVisted){
             randomEnemy = new Enemy(currentPlayer, "random", true, 0.5, true);
-            randomEnemyName = randomEnemy.getName();
             storageRoom.isVisted = true;
             storageRoom.displayInfo(storageRoom.description);
         }else if(option.nextText == 146 && !library.isVisted){
@@ -232,23 +231,27 @@ function selectOption(option){
         ogre.setAttackStrength(ogre.getAttackStrength() - 5);
         malikai.setAttackStrength(malikai.getAttackStrength() - 5);
     }else if(option.nextText == 117){
-        randomizeCombat(17,98, 50);
+        combat(currentPlayer, wolf, 11, 17, 98);
     }else if(option.nextText == 189){
-        randomizeCombat(89, 98, 50);
+        combat(currentPlayer, wizard, 44, 89, 98);
     }else if(option.nextText == 190){
-        randomizeCombat(90, 98, 50);
+        combat(currentPlayer, randomEnemy, 44,90,98)
     }else if(option.nextText == 191){
-        randomizeCombat(91, 98, 50);
+        combat(currentPlayer, randomEnemy, 39,91,98);
     }else if(option.nextText == 192){
-        randomizeCombat(92, 98, 50);
+        combat(currentPlayer, randomEnemy, 11,92,98);
     }else if(option.nextText == 193){
-        randomizeCombat(93, 98, 50);
+        combat(currentPlayer, elf, 11,93,98);
     }else if(option.nextText == 194){
-        randomizeCombat(94, 98, 50);
+        if(village.isVisted){
+            combat(currentPlayer, randomEnemy, 26, 94, 98);
+        }else{
+            combat(currentPlayer, randomEnemy, 11, 94, 98);
+        }
     }else if(option.nextText == 195){
-        randomizeCombat(95, 98, 50);
+        combat(currentPlayer, ogre, 11, 95, 98);
     }else if(option.nextText == 196){
-        randomizeCombat(96, 98, 50);
+        combat(currentPlayer, randomEnemy, 11, 17, 98);
     }else if(option.nextText > 156 && option.nextText < 159){
         var weaponChoice = option.text;
         if(weaponChoice === "Strong Sword"){
@@ -276,9 +279,9 @@ function selectOption(option){
     }else if(option.nextText == 161){
         getProbability(61, 63, 50);
     }else if(option.nextText == 163){
-        randomizeCombat(63,98, 50)
+        combat(currentPlayer, voice, 62,63, 98)
     }else if(option.nextText == 188){
-        randomizeCombat(88,98,50);
+        combat(currentPlayer, malikai, 60, 88, 98);
     }else{
         showTextNode(nextTextNodeId);
     }
@@ -382,9 +385,9 @@ const textNodes = [
         ]
     },
     {
-    id: 9,
-    text: `You have chosen the staff. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
-    options: [
+        id: 9,
+        text: `You have chosen the staff. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
+        options: [
             {
                 text: '...',
                 nextText: 11
@@ -531,8 +534,8 @@ const textNodes = [
         text: 'You enter the tent of your base and find upgraded weapons and a couple of potions. You recieve an upgraded sword, an upgraded bow & arrow, and a healing potion.',
         options:[
             {
-            text: 'Go back',
-            nextText: 111
+                text: 'Go back',
+                nextText: 111
             },
         ]
     },
@@ -551,8 +554,8 @@ const textNodes = [
         text: 'You: Well, I fought very valiantly. I was slaying ogres left and right alongside my fellow soldiers. However, the ogre attacks became too much for my body to handle and I was left too weak to continue to fight, despite my very best efforts. \n \n Villager: While you do look awfully rough, if I remember right, some villagers went out to the battlegrounds after the ogres had left, and there were no ogre bodies in sight. How could you have been killing multiple, but no bodies were found? You are not being truthful. I refuse to communicate with liars. Goodbye. ',
         options:[
             {
-            text: '...',
-            nextText: 25
+                text: '...',
+                nextText: 25
             },
         ]
     },
@@ -600,7 +603,7 @@ const textNodes = [
     },
     {
         id: 28,
-        text: `As you continue your trek through the dark and thick forest, you come across a ${randomEnemyName} and this ${randomEnemyName} does not look happy.`,
+        text: `As you continue your trek through the dark and thick forest, you come across an enemy and this enemy does not look happy.`,
         options:[
             {
                 text: 'Start Combat',
@@ -678,16 +681,16 @@ const textNodes = [
     },
     {
         id: 35,
-        text: `You finally make it out of the forest after what seems like a very long and confusing trek. You exit out of the forest into an open field. Sitting in the middle of the field is a ${randomEnemyName}. The ${randomEnemyName} spots you. Quick! Get ready to fight!`,
+        text: `You finally make it out of the forest after what seems like a very long and confusing trek. You exit out of the forest into an open field. Sitting in the middle of the field is an enemy. The enemy spots you. Quick! Get ready to fight!`,
         options: [{
-                text: 'Start Combat',
-                nextText: 192
-            }
+            text: 'Start Combat',
+            nextText: 192
+        }
         ]
     },
     {
         id: 36,
-        text: `Queen Elf: Hello, I am Queen Elivia! Thank you kind stranger for saving my son! What can we ever do to repay you for your selfless deed! Here take these enchanted weapons as a token of our appreciation! Would you like a bed to sleep in for the night? \n\n Voice: Oh no, you must not waste another minute straying away from the task at hand! Tell them that you must be going! \n\n You: I am so sorry Queen Elivia, but I must be going. I am on a very important mission! \n\n Queen Elivia: No worries my dear! May we point you in the way of a potion maker down the road, I'm sure he will be able to help you in your journey!`,
+        text: `Queen Elf: Hello, I am Queen Elivia! Thank you kind stranger for saving my son! Here take these enchanted weapons as a token of our appreciation! Would you like a bed to sleep in for the night? \n\n Voice: Oh no, you must not waste another minute straying away from the task at hand! Tell them that you must be going! \n\n You: I am so sorry Queen Elivia, but I must be going. \n\n Queen Elivia: No worries my dear! May we point you in the way of a potion maker down the road, I'm sure he will be able to help you in your journey!`,
         options:[
             {
                 text: 'Thank you Queen Elivia! I will follow your advice',
@@ -699,9 +702,9 @@ const textNodes = [
         id: 37,
         text: ` Night is setting in and from this field you can see two paths. One leads to a mysterious light. Could it be another village? A travelers camp? No matter what it is, you hope that it leads to some sort of help. The other leads to what appears to be a giant tower. Could it be the ogre’s tower? Which option do you choose?`,
         options: [{
-                text: 'Follow the light',
-                nextText: 38
-            },
+            text: 'Follow the light',
+            nextText: 38
+        },
             {
                 text: 'Go towards the tower',
                 nextText: 39
@@ -712,9 +715,9 @@ const textNodes = [
         id: 38,
         text: `You decide to walk towards the mysterious light and as you get closer and closer, there does not seem to be any type of village or camp. Instead you find it is just an unattended fire. As you walk closer the ground breaks from under you! You end up falling into a trap set by the ogres! This does not look good….`,
         options: [{
-                text: '...',
-                nextText: 96
-            }
+            text: '...',
+            nextText: 96
+        }
         ]
     },
     {
@@ -791,7 +794,7 @@ const textNodes = [
     },
     {
         id: 45,
-        text: `You decide to enter the storage room and find that the items store away are guarded by a(n) ${randomEnemyName}. In order to get to the items stored away, you must fight the ${randomEnemyName}`,
+        text: `You decide to enter the storage room and find that the items store away are guarded by an enemy. In order to get to the items stored away, you must fight the enemy`,
         options: [
             {
                 text: 'Start Combat',
@@ -894,8 +897,8 @@ const textNodes = [
         text: `You leave the Mage Tower and begin walking towards the blacksmith. The sun is starting to rise as you approach the blacksmith's door. Right as you are about to knock, the door swings open! \n\n Blacksmith: Ah ${currentPlayer.getName()}, I have been waiting for you! Please come in!`,
         options:[
             {
-            text: `Enter the blacksmith's`,
-            nextText: 55
+                text: `Enter the blacksmith's`,
+                nextText: 55
             }
         ]
     },
@@ -1016,8 +1019,8 @@ const textNodes = [
         text: `You leave the Elf Castle and begin walking towards the potion master. The sun is starting to rise as you approach the potion master's door. Right as you are about to knock, the door swings open! \n\n Potion Master: Ah ${currentPlayer.getName()}, I have been waiting for you! Please come in!`,
         options:[
             {
-            text: `Enter the Potion Master's`,
-            nextText: 66
+                text: `Enter the Potion Master's`,
+                nextText: 66
             }
         ]
     },
@@ -1091,18 +1094,18 @@ const textNodes = [
         id: 89,
         text: `You have successfully fight off the Wizard. \n\n Voice: Congrats! Look at you getting stronger and stronger each battle! Now you are almost ready to fight Malikai. \n\n You look around the room and find a few healing, strength, & mana potions. As you are heading towards the door, you see a letter addressed to a blacksmith, maybe you should go there next! You begin your trek to find this blacksmith!`,
         options: [{
-                text: '...',
-                nextText: 154
-            }
+            text: '...',
+            nextText: 154
+        }
         ]
     },
     {
         id: 90,
-        text: `You have successfully beaten the ${randomEnemyName}! You have collected various items from the storage room! Now what would you like to do?`,
+        text: `You have successfully beaten the enemy! You have collected various items from the storage room! Now what would you like to do?`,
         options: [{
-                text: 'Library',
-                nextText: 46
-            },
+            text: 'Library',
+            nextText: 46
+        },
             {
                 text: 'Up the Stairs',
                 nextText: 47
@@ -1113,51 +1116,51 @@ const textNodes = [
         id: 91,
         text: `Congrats! You have successfully protected yourself against the large beast! You see a set of stairs in front of you. Hurry up before another beast comes to finish you off!`,
         options: [{
-                text: '...',
-                nextText: 43
-            }
+            text: '...',
+            nextText: 43
+        }
         ]
     },    {
         id: 92,
-        text: `Congrats! You have slayed the ${randomEnemyName}`,
+        text: `Congrats! You have slayed the enemy`,
         options: [{
-                text: '...',
-                nextText: 37
-            }
+            text: '...',
+            nextText: 37
+        }
         ]
     },    {
         id: 93,
         text: `Congrats! You have beaten the elf! \n\n Voice: Finally you are starting to listen to me! That lowly elf was not worth your saving! Let's continue through the forest!`,
         options: [{
-                text: '...',
-                nextText: 35
-            }
+            text: '...',
+            nextText: 35
+        }
         ]
     },    {
         id: 94,
-        text: `Congrats! You have beaten the ${randomEnemyName}`,
+        text: `Congrats! You have beaten the enemy`,
         options: [{
-                text: '...',
-                nextText: 29
-            }
+            text: '...',
+            nextText: 29
+        }
         ]
     },
-     {
+    {
         id: 95,
         text: `You have successfully beating the ogre! \n\n Voice: Wow, I did not think you had that in you. I was expecting you to die within seconds. Well, let's keep moving I guess.`,
         options: [{
-                text: '...',
-                nextText: 29
-            }
+            text: '...',
+            nextText: 29
+        }
         ]
     },
     {
         id: 96,
         text: `Turns out the light you were walking towards led you straight into a trap by the ogres. You have died. Try again?`,
         options: [{
-                text: '...',
-                nextText: 96
-            }
+            text: '...',
+            nextText: 96
+        }
         ]
     },
     {
