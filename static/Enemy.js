@@ -18,8 +18,8 @@ class Enemy{
 		 drop: true - enemy drops an item, false - no item drop */
 	constructor(player, name, random, strengthFactor, dropChance){
 		this.deathStatus = false;
-		this.health = player.getCurrentHP() * strengthFactor;
-		this.attackStrength = player.getCurrentAttack() * strengthFactor;
+		this.health = Math.round(player.getCurrentHP() * strengthFactor);
+		this.attackStrength = Math.round(player.getCurrentAttack() * strengthFactor);
 
 		if(random == true){
 			this.name = this.enemyType[Math.floor(Math.random() * this.enemyType.length)];
