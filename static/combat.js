@@ -1,8 +1,6 @@
-const textContainer = document.getElementsByClassName('container')[0]
-const combatContainer = document.getElementsByClassName('combatContainer')[0]
-
 const adjectives = ["Eldritch", "Vile", "Vicious", "Seething"];
 
+//
 
 function combat(player, enemy){
         $(".prompt").animate({height: '-=100%'}, 2500);
@@ -35,35 +33,26 @@ function battle(player, enemy) {
                 turn = attackEnemy(enemy, enemyMaxHP, turn, player)
         });
 
-        /*while (enemy.getDeathStatus() == false) {
-                if (turn % 2 == 0) {
-                        $('#combatAttack').removeAttr('disabled');
-                        $('#combatRun').removeAttr('disabled');
+        $("#combatRun").click(function () {
 
-                }
-                else if (turn %2 != 0) {
-                        $('#combatAttack').attr('disabled','disabled');
-                        $('#combatRun').attr('disabled','disabled');
-                        attackPlayer(player, enemy)
-                        turn++;
-                }
-
-        }*/
-
-        console.log("victory")
+            var probability = Math.random() * 100;
+            if (probability > 35) {
+                endCombat("run");
+            }
+            else attackPlayer(player,enemy)
+        });
 
 }
 
 function attackEnemy(enemy, enemyMaxHP, turn, player){
-        enemy.setHealth(enemy.getHealth() - player.getCurrentAttack()*10);
+        enemy.setHealth(enemy.getHealth() - player.getCurrentAttack());
+        updateEnemyStats(enemy,enemyMaxHP);
         if (enemy.getHealth() <= 0) {
                 enemy.setDeathStatus(true);
+                endCombat("win"); //won
         }
-        updateEnemyStats(enemy,enemyMaxHP);
 
-        console.log(turn);
-
-        return turn + 1;
+        attackPlayer(player,enemy);
 }
 
 function updateEnemyStats(enemy, enemyMaxHP) {
@@ -71,6 +60,29 @@ function updateEnemyStats(enemy, enemyMaxHP) {
 }
 
 function attackPlayer(player, enemy) {
-        player.setHealth(player.getHealth() - enemy.getAttackStrength()/10);
+        player.setCurrentHP(player.getCurrentHP() - enemy.getAttackStrength());
         player.displayStats();
+        if(player.getCurrentHP <= 0) {
+            endCombat("lose"); //loss
+        }
+}
+
+function endCombat(outcome) {
+    if(outcome == "win") {
+        // go to next area
+        console.log("you have won")
+    }
+    if(outcome == "lose") {
+        // go to death screen
+        console.log("you ded son")
+    }
+    if(outcome == "run") {
+        // go to prev area
+        console.log("you alive son")
+    }
+
+    $("#enemyContainer").css("display", "none");
+    $("#combatMenu").css("display", "none");
+    $(".prompt").animate({height: '+=100%'}, 2500);
+    $(".combatContainer").animate({height: '-=100%'}, 2500);
 }

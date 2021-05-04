@@ -50,9 +50,14 @@ class Enemy{
 		return this.health;
 	}
 
-	setHealth(health){
-		this.health = health;
-	}
+    setHealth(health){
+        if(health <= 0){
+            this.health = 0;
+        }
+        else{
+            this.health = health;
+        }
+    }
 
 	getDeathStatus(){
 		return this.deathStatus;

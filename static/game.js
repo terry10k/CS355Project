@@ -125,7 +125,6 @@ function showOption(option){
 function selectOption(option){
     //CHANGE HERE FOR GOING FROM CREATING AREAS TO SHOWING TEXT NODES TO BATTLES ETC.
     const nextTextNodeId = (option.nextText % 100);
-    console.log(currentPlayer.getInventory());
     if(nextTextNodeId <= 0){
         document.location.reload();
     }
