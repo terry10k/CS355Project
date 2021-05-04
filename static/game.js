@@ -76,6 +76,7 @@ function getProbability(choice1, choice2, percentage){
 }
 
 function randomizeCombat(path1, path2, percentage){
+    combat(currentPlayer, wolf);
     var probability = Math.random() * 100;
     console.log(probability);
     if(probability > percentage){
@@ -95,10 +96,7 @@ function game(){
     currentPlayer.displayStats();
     currentPlayer.displayInventory();
 
-    currentPlayer.addInventory(healingPotion)
-    currentPlayer.addInventory(manaPotion)
-    currentPlayer.addInventory(manaPotion)
-    currentPlayer.addInventory(healingPotion)
+
     console.log(currentPlayer.getInventory())
     battlefield.displayInfo(battlefield.description);
     battlefield.isVisted = true;

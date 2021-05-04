@@ -107,7 +107,7 @@ body {
     padding: 30px;
     text-align: center;
 
-    min-height: 10%;
+    min-height: 0%;
 
 }
 
@@ -128,8 +128,78 @@ body {
     width: 100%;
     height: 0;
     background-color: aquamarine;
-    max-height: 90%;
+    max-height: 100%;
     min-height: 0;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    border-radius: 0;
+}
+
+.combatContainer > div {
+    border-radius: 0;
+}
+
+#enemyContainer {
+    display: none;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 60%;
+    margin: 0 20% 0;
+    background-color:red;
+}
+
+#combatEnemy {
+    width: 100%;
+    height: 90%;
+}
+
+#combatEnemy > img {
+    width: 100%;
+    height: 100%;
+}
+
+#enemyStats {
+    width: 100%;
+    height: 10%;
+    text-align: center;
+}
+
+#combatMenu {
+    width: 100%;
+    height: 40%;
+    background-color: brown;
+    display: none;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#combatPrompt {
+    width: 80%;
+    border: 1px solid black;
+    height: 50%;
+    background-color: gold;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+
+#combatButtons {
+    width : 50%;
+    height: 40%;
+    background-color: white;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#combatButtons > button {
+    padding: 0 20% 0;
+    width: auto;
 }
 
 

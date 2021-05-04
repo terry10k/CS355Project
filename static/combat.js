@@ -1,10 +1,71 @@
 const textContainer = document.getElementsByClassName('container')[0]
 const combatContainer = document.getElementsByClassName('combatContainer')[0]
 
+const adjectives = ["Eldritch", "Vile", "Vicious", "Seething"];
 
-$(function () {
-    $(".container").click(function (){
-        $(".prompt").animate({height: '-=90%'}, 2500);
-        $(".combatContainer").animate({height: '+=90%'}, 2500);
-    })
-})
+
+function combat(player, enemy){
+        $(".prompt").animate({height: '-=100%'}, 2500);
+        $(".combatContainer").animate({height: '+=100%'}, 2500);
+
+        $('#combatAttack').attr('disabled','disabled');
+        $('#combatRun').attr('disabled','disabled');
+
+        var wolfPic = '<img src="../assets/hell-hound-idle.gif" alt="wolfIdle" />';
+        $("#combatEnemy").append(wolfPic);
+
+
+
+        battle(player, enemy)
+}
+
+function battle(player, enemy) {
+        var enemyMaxHP = enemy.getHealth();
+        console.log(enemy)
+
+        $("#enemyContainer").css("display", "flex");
+        $("#combatMenu").css("display", "flex");
+        updateEnemyStats(enemy, enemyMaxHP)
+        var prefix = adjectives[Math.floor(Math.random() * adjectives.length)];
+        $("#combatPrompt").text(`A ${prefix} ${enemy.getName()} prepares to attack you`);
+
+        var turn = 0;
+
+        $("#combatAttack").click(attackEnemy(enemy, enemyMaxHP, turn, player));
+
+       // while (enemy.getDeathStatus() == false && turn < 100) {
+
+                if (turn % 2 == 0) {
+                        $('#combatAttack').removeAttr('disabled');
+                        $('#combatRun').removeAttr('disabled');
+
+                }
+                else if (turn %2 != 0) {
+                        $('#combatAttack').attr('disabled','disabled');
+                        $('#combatRun').attr('disabled','disabled');
+                        attackPlayer(player, enemy)
+                        turn++;
+                }
+
+ //       }
+
+}
+
+function attackEnemy(enemy, enemyMaxHP, turn, player){
+        enemy.setHealth = enemy.getHealth() - player.getCurrentAttack()*10;
+        if (enemy.getHealth() <= 0) {
+                enemy.setDeathStatus(true);
+        }
+        updateEnemyStats(enemy,enemyMaxHP);
+        turn++;
+        console.log(turn);
+}
+
+function updateEnemyStats(enemy, enemyMaxHP) {
+        $("#enemyStats").text(`${enemy.getName()}  Health: ${enemy.getHealth()}/${enemyMaxHP}`)
+}
+
+function attackPlayer(player, enemy) {
+        player.setHealth =- enemy.getAttackStrength()/10;
+        player.displayStats();
+}

@@ -18,9 +18,9 @@ class Player{
 		this.name = name;
 		this.baseAttack = 8;
 		this.maxMana = 50;
-		this.currentMana = 0;//this.maxMana;
+		this.currentMana = this.maxMana;
 		this.maxHP = 100;
-		this.currentHP = 10;//this.maxHP;
+		this.currentHP = this.maxHP;
 	}
 
 	//Returns the name of the player
@@ -46,6 +46,7 @@ class Player{
 	//Set current weapon the player is using to a new weapon (weapon object)
 	setCurrentWeapon(currentWeapon){
 		this.currentWeapon = currentWeapon;
+		this.displayStats();
 	}
 
 	//Returns the player's total attack strength (weapon + base)
@@ -190,7 +191,7 @@ class Player{
 
 			if(currentItem.getItemType() == "weapon") {
 				$(`#inventoryItem${i}`).click(function () {
-					currentItem.useWeapon(player);
+					player.setCurrentWeapon(currentItem);
 				})
 			}
 			else if(currentItem.getItemType() == "potion") {
@@ -198,7 +199,6 @@ class Player{
 				$(`#inventoryItem${i}`).click(function () {
 					currentItem.usePotion(player);
 					player.removeInventory(currentItem);
-					console.log(this.innerText)
 				})
 			}
 		}

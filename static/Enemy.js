@@ -39,7 +39,7 @@ class Enemy{
 	}
 
 	getAttackStrength(){
-		return attackStrength;
+		return this.attackStrength;
 	}
 
 	setAttackStrength(attackStrength){
@@ -47,7 +47,7 @@ class Enemy{
 	}
 
 	getHealth(){
-		return health;
+		return this.health;
 	}
 
 	setHealth(health){
@@ -55,7 +55,7 @@ class Enemy{
 	}
 
 	getDeathStatus(){
-		return deathStatus;
+		return this.deathStatus;
 	}
 
 	setDeathStatus(deathStatus){
@@ -63,7 +63,7 @@ class Enemy{
 	}
 
 	getDropChance(){
-		return dropChance;
+		return this.dropChance;
 	}
 
 	setDropChance(dropChance){

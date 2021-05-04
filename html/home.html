@@ -29,7 +29,7 @@
   <script defer src = "../static/weapon.js"></script>
   <script defer src = "../static/Player.js"></script>
   <script defer src = "../static/titleScreen.js"></script>
-
+  <script defer src = "../static/combat.js"></script>
   <script defer src="../static/game.js"></script>
 
 
@@ -84,7 +84,19 @@
 </div>
 
 <div class="container">
-  <div class="combatContainer"></div>
+  <div class="combatContainer">
+    <div id="enemyContainer">
+      <div id="combatEnemy"></div>
+      <div id="enemyStats"></div>
+    </div>
+    <div id="combatMenu">
+      <div id="combatPrompt"></div>
+      <div id="combatButtons">
+        <button id = "combatAttack">Attack</button>
+        <button id = "combatRun">Run</button>
+      </div>
+    </div>
+  </div>
 
   <div id="prompt">Text</div>
   <div id="option-buttons" class="button-grid">
