@@ -11,14 +11,10 @@ class area {
      * enemySpawnChance - number chance of an enemy spawning 
      * isVisted - boolean for if the area has been visted 
      */
-    constructor(name, description, areaNumber, hasEnemyInteractions = false, hasNPCInteractions = false, hasItemInteractions = false, areaConnections, enemySpawnChance, isVisted = false){
+    constructor(name, description, hasEnemyInteractions = false, enemySpawnChance, isVisted = false){
         this.name = name;
         this.description = description;
-        this.areaNumber = areaNumber;
         this.hasEnemyInteractions = hasEnemyInteractions;
-        this.hasNPCInteractions = hasNPCInteractions;
-        this.hasItemInteractions =  hasItemInteractions;
-        this.areaConnections = areaConnections;
         this.enemySpawnChance = enemySpawnChance;
         this.isVisted = isVisted;
     }
@@ -37,30 +33,4 @@ class area {
             this.hasEnemyInteractions = false;
         }
     }
-
-    //Get area name
-    getName(){
-        return this.name;
-    }
-
-    //Get area description
-    getDescription(){
-        return this.description;
-    }
-
-    //Get area number
-    getAreaNumber(){
-        return this.areaNumber;
-    }
-
-    //Get area connections
-    getAreaConnections(){
-        return this.areaConnections;
-    }
-
-    //Set new description of area (used for if the area has already been visited)
-    setDescription(newDescription){
-        this.description = newDescription;
-    }
-
 }

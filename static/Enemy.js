@@ -17,11 +17,11 @@ class Enemy{
 		 drop: true - enemy drops an item, false - no item drop */
 	constructor(player, name, random, strengthFactor, dropChance){
 		this.deathStatus = false;
-		this.health = player.getHealth() * strengthFactor;
-		this.attackStrength = player.getAttackStrength() * strengthFactor;
+		this.health = player.getCurrentHP() * strengthFactor;
+		this.attackStrength = player.getCurrentAttack() * strengthFactor;
 
 		if(random == true){
-			this.name = enemyType[Math.floor(Math.random() * enemyType.length)];
+			this.name = this.enemyType[Math.floor(Math.random() * this.enemyType.length)];
 			this.dropChance = Boolean(Math.floor(Math.random() * 2));
 		}
 		else{
@@ -31,7 +31,7 @@ class Enemy{
 	}
 
 	getName(){
-		return name;
+		return this.name;
 	}
 
 	setName(name){

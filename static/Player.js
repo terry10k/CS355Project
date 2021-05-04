@@ -9,11 +9,11 @@ class Player{
 	inventory = [];	 //players inventory - each entry has the format of: [item object, number of items]
 	states = {}			 //player states - each entry has format of: "state_name":boolean_Value
 
-/**
- * Constructs a player class
- * Parameters:
- * name (string): player's name
- */
+    /**
+    * Constructs a player class
+    * Parameters:
+    * name (string): player's name
+    */
 	constructor(name){
 		this.name = name;
 		this.baseAttack = 8;
@@ -150,29 +150,6 @@ class Player{
 			}
 		}
 		return false;
-	}
-
-	//Returns the state array
-	getState(){
-		return state;
-	}
-
-	/**
-	 * Adds a state to the array
-	 * key (string) - name of the state
-	 * value (boolean) - true or false value for the respective state
-	 */
-	addState(key, value){
-		states.push(key, value);
-	}
-
-
-	removeState(stateEntry){
-		delete states.stateEntry;
-	}
-
-	searchState(stateEntry){
-		return states.stateEntry;
 	}
 
     displayStats() {

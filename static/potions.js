@@ -50,6 +50,17 @@ class potions extends item{
             player.setAttackStrength(player.getAttackStrength() + this.strengthIncrease);
         }//end of strength clause
 
+        else if(this.potionType === "super healing"){
+            player.setCurrentHP(player.getMaxHP());
+        }
+
+        else if(this.potionType === "super mana"){
+            player.setCurrentMana(player.getMaxMana());
+        }
+
+        else if(this.potionType === "super strength"){
+            player.setAttackStrength(player.getAttackStrength() + this.strengthIncrease * 2);
+        }
 
         player.displayStats()
         /* Room for expansion
