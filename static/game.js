@@ -1,4 +1,4 @@
-const textElement = document.getElementById('text');
+const textElement = document.getElementById('prompt');
 const optionButtonsElement = document.getElementById('option-buttons');
 
 //This is the spot where we will hold the weapon that is currently being used: set at default right now
@@ -93,6 +93,13 @@ function game(){
     var value = localStorage.getItem("playerName");
     currentPlayer = new Player(value);
     currentPlayer.displayStats();
+    currentPlayer.displayInventory();
+
+    currentPlayer.addInventory(healingPotion)
+    currentPlayer.addInventory(manaPotion)
+    currentPlayer.addInventory(manaPotion)
+    currentPlayer.addInventory(healingPotion)
+    console.log(currentPlayer.getInventory())
     battlefield.displayInfo(battlefield.description);
     battlefield.isVisted = true;
 

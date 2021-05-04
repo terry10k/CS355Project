@@ -18,9 +18,9 @@ class Player{
 		this.name = name;
 		this.baseAttack = 8;
 		this.maxMana = 50;
-		this.currentMana = this.maxMana;
+		this.currentMana = 0;//this.maxMana;
 		this.maxHP = 100;
-		this.currentHP = this.maxHP
+		this.currentHP = 10;//this.maxHP;
 	}
 
 	//Returns the name of the player
@@ -50,7 +50,10 @@ class Player{
 
 	//Returns the player's total attack strength (weapon + base)
 	getCurrentAttack(){
-		return (this.baseAttack + this.currentWeapon.getStrength());
+		if (this.currentWeapon == null) {
+			return this.baseAttack;
+		}
+		else return (this.baseAttack + this.currentWeapon.getStrength());
 	}
 
 	//Returns player's max possible mana
@@ -118,7 +121,7 @@ class Player{
 			this.inventory.push([item, 1]);
 		}
 
-		//probably put displayinventory here
+		this.displayInventory()
 	}
 
 	/**
@@ -129,7 +132,7 @@ class Player{
 	removeInventory(item){
 		for(var i = 0; i < this.inventory.length; i++){
 			//if item to remove is found
-			if(this.inventory[i][0].getitemName() == item.getItemName()){
+			if(this.inventory[i][0].getItemName() == item.getItemName()){
 				this.inventory[i][1] = this.inventory[i][1] - 1; //decrement amount
 				if(this.inventory[i][1] == 0){ //if item amount is 0
 					this.inventory.splice(i, 1); //remove entry from array
@@ -137,7 +140,7 @@ class Player{
 				break;
 			}
 		}
-		//put displayinventory here as well
+		this.displayInventory()
 	}
 
 /**
@@ -153,14 +156,52 @@ class Player{
 	}
 
     displayStats() {
-        $("#health").text(`Health: ${currentPlayer.getCurrentHP()}/${currentPlayer.getMaxHP()}`)
-        $('.hpBar span').width(currentPlayer.getCurrentHP() + "%");
+        $("#health").text(`Health: ${this.getCurrentHP()}/${this.getMaxHP()}`)
+        $('.hpBar span').width(this.getCurrentHP() + "%");
 
-        $("#mana").text(`Mana: ${currentPlayer.getCurrentMana()}/${currentPlayer.getMaxMana()}`)
-        $('.manaBar span').width(currentPlayer.getCurrentMana()*2 + "%");
+        $("#mana").text(`Mana: ${this.getCurrentMana()}/${this.getMaxMana()}`)
+        $('.manaBar span').width(this.getCurrentMana()*2 + "%");
 
         //fix this later for weapons
-        //$("#atk").text(`Attack Strength: ${currentPlayer.getAttackStrength()}`)
+        $("#atk").text(`Attack Strength: ${this.getCurrentAttack()}`)
     }
 
+	displayInventory() {
+		var i;
+		var currentItem;
+		var currentItemCount;
+		for (i = 0; i < 10; i++) {
+			$(`#inventoryItem${i}`).empty();
+			$(`#inventoryItem${i}`).off('click');
+
+		}
+
+		for (i = 0; i < this.inventory.length; i++) {
+			currentItem = this.inventory[i][0];
+			currentItemCount = this.inventory[i][1];
+			$(`#inventoryItem${i}`).append($('<div>').prop({
+				id: 'inventoryItem',
+				innerHTML: `${currentItem.getItemName()}`,
+			}));
+			$(`#inventoryItem${i}`).append($('<div>').prop({id: 'count', innerHTML: `${currentItemCount}`,}));
+
+
+			var player = this;
+
+			if(currentItem.getItemType() == "weapon") {
+				$(`#inventoryItem${i}`).click(function () {
+					currentItem.useWeapon(player);
+				})
+			}
+			else if(currentItem.getItemType() == "potion") {
+
+				$(`#inventoryItem${i}`).click(function () {
+					currentItem.usePotion(player);
+					player.removeInventory(currentItem);
+					console.log(this.innerText)
+				})
+			}
+		}
+
+	}
 }
