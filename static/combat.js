@@ -55,11 +55,12 @@ function battle(player, enemy) {
 }
 
 function attackEnemy(enemy, enemyMaxHP, turn, player){
-        enemy.setHealth(enemy.getHealth() - player.getCurrentAttack()*10);
+        enemy.setHealth(enemy.getHealth() - player.getCurrentAttack());
+        updateEnemyStats(enemy,enemyMaxHP);
         if (enemy.getHealth() <= 0) {
                 enemy.setDeathStatus(true);
         }
-        updateEnemyStats(enemy,enemyMaxHP);
+
 
         console.log(turn);
 
@@ -71,6 +72,6 @@ function updateEnemyStats(enemy, enemyMaxHP) {
 }
 
 function attackPlayer(player, enemy) {
-        player.setHealth(player.getHealth() - enemy.getAttackStrength()/10);
+        player.setHealth(player.getHealth() - enemy.getAttackStrength());
         player.displayStats();
 }

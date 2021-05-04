@@ -74,7 +74,12 @@ class Player{
 
 	//Sets player's current mana to a new value (int)
 	setCurrentMana(currentMana){
-		this.currentMana = currentMana;
+		if(currentMana <= 0){
+			this.currentMana = 0;
+		}
+		else{
+			this.currentMana = currentMana;
+		}
 	}
 
 	//Returns player's current health
@@ -84,7 +89,12 @@ class Player{
 
 	//Sets player's current health to a new value (int)
 	setCurrentHP(currentHP){
-		this.currentHP = currentHP;
+		if(currentHP <= 0){
+			this.currentHP = 0;
+		}
+		else{
+			this.currentHP = currentHP;
+		}
 	}
 
 	//Gets player's max possible health
