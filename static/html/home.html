@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html itemscope itemtype="https://schema.org/CreativeWork">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../static/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!--
+        Simple text game v0.1
+        ==================
+
+        A minimalist text adventure by Pavithra Mohan, Laura Pryor and Terry Tumennasan
+
+        Github: https://github.com/terry10k/CS355Project
+    -->
+  <title>Text-Based Adventure Game</title>
+  <meta itemprop="description" name="description" property="og:description" content="Text adventure">
+  <meta itemprop="name" property="og:title" content="Text-Based Adventure Game" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <script defer src = "../static/area.js"></script>
+  <script defer src = "../static/Enemy.js"></script>
+  <script defer src = "../static/npc.js"></script>
+  <script defer src = "../static/item.js"></script>
+  <script defer src = "../static/potions.js"></script>
+  <script defer src = "../static/weapon.js"></script>
+  <script defer src = "../static/Player.js"></script>
+  <script defer src = "../static/titleScreen.js"></script>
+  <script defer src = "../static/combat.js"></script>
+  <script defer src="../static/game.js"></script>
+
+
+  <!--
+  <script defer src = "../static/combat.js"></script>
+  -->
+
+
+
+</head>
+<body>
+<div id="titleScreen">
+  <div id="titleName">JOURNEY THROUGH TEAVRA</div>
+  <button id="startButton">Start Game</button>
+  <div id ="namePrompt">Welcome, stranger! What is your name?</div>
+  <div id = nameContainer></div>
+</div>
+
+
+<div id = "head">
+  <div id = "headTitle">JOURNEY THROUGH TEAVRA</div>
+</div>
+<div id = "hud">
+  <div id="hudTitle"></div>
+  <div id="hudPicture">
+
+  </div>
+
+  <div id="hudStats">
+    <div id="health">
+      hp
+    </div>
+    <div class="hpBar">
+      <span style="width: 0%"></span>
+    </div>
+
+
+    <div id="mana">
+      mana
+    </div>
+    <div class="manaBar">
+      <span style="width: 0%"></span>
+    </div>
+
+    <div id="atk">
+      atk
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div class="container">
+  <div class="combatContainer">
+    <div id="enemyContainer">
+      <div id="combatEnemy"></div>
+      <div id="enemyStats"></div>
+    </div>
+    <div id="combatMenu">
+      <div id="combatPrompt"></div>
+      <div id="combatButtons">
+        <button id = "combatAttack">Attack</button>
+        <button id = "combatRun">Run</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="prompt">Text</div>
+  <div id="option-buttons" class="button-grid">
+    <button class="button">Option 1</button>
+    <button class="button">Option 2</button>
+    <button class="button">Option 3</button>
+    <button class="button">Option 4</button>
+  </div>
+</div>
+
+
+
+<div id = "inventory">
+  <div id="inventoryTitle">Inventory</div>
+  <div id="inventoryItems">
+    <div id="inventoryItem0"></div>
+    <div id="inventoryItem1"></div>
+    <div id="inventoryItem2"></div>
+    <div id="inventoryItem3"></div>
+    <div id="inventoryItem4"></div>
+    <div id="inventoryItem5"></div>
+    <div id="inventoryItem6"></div>
+    <div id="inventoryItem7"></div>
+    <div id="inventoryItem8"></div>
+    <div id="inventoryItem9"></div>
+  </div>
+</div>
+<div id = "footer"></div>
+
+</body>
+</html>
