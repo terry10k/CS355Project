@@ -47,7 +47,7 @@ class potions extends item{
         }//end of mana clause
 
         else if(this.potionType === "strength"){
-            player.setAttackStrength(player.getAttackStrength() + this.strengthIncrease);
+            player.setBaseAttack(player.getCurrentAttack() + this.strengthIncrease);
         }//end of strength clause
 
         else if(this.potionType === "super healing"){

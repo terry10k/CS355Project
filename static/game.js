@@ -96,6 +96,12 @@ function game(){
     currentPlayer.displayStats();
     currentPlayer.displayInventory();
 
+    //delete this later
+    currentPlayer.addInventory(bowArrow);
+    currentPlayer.addInventory(sword);
+    currentPlayer.addInventory(manaPotion);
+    currentPlayer.addInventory(manaPotion);
+    currentPlayer.addInventory(strengthPotion);
 
     console.log(currentPlayer.getInventory())
     battlefield.displayInfo(battlefield.description);

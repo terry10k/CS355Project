@@ -31,10 +31,11 @@ function battle(player, enemy) {
 
         var turn = 0;
 
-        $("#combatAttack").click(attackEnemy(enemy, enemyMaxHP, turn, player));
+        $("#combatAttack").click(function() {
+                turn = attackEnemy(enemy, enemyMaxHP, turn, player)
+        });
 
-       // while (enemy.getDeathStatus() == false && turn < 100) {
-
+        while (enemy.getDeathStatus() == false) {
                 if (turn % 2 == 0) {
                         $('#combatAttack').removeAttr('disabled');
                         $('#combatRun').removeAttr('disabled');
@@ -47,18 +48,22 @@ function battle(player, enemy) {
                         turn++;
                 }
 
- //       }
+        }
+
+        console.log("victory")
 
 }
 
 function attackEnemy(enemy, enemyMaxHP, turn, player){
-        enemy.setHealth = enemy.getHealth() - player.getCurrentAttack()*10;
+        enemy.setHealth(enemy.getHealth() - player.getCurrentAttack()*10);
         if (enemy.getHealth() <= 0) {
                 enemy.setDeathStatus(true);
         }
         updateEnemyStats(enemy,enemyMaxHP);
-        turn++;
+
         console.log(turn);
+
+        return turn + 1;
 }
 
 function updateEnemyStats(enemy, enemyMaxHP) {
@@ -66,6 +71,6 @@ function updateEnemyStats(enemy, enemyMaxHP) {
 }
 
 function attackPlayer(player, enemy) {
-        player.setHealth =- enemy.getAttackStrength()/10;
+        player.setHealth(player.getHealth() - enemy.getAttackStrength()/10);
         player.displayStats();
 }

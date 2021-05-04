@@ -18,9 +18,9 @@ class Player{
 		this.name = name;
 		this.baseAttack = 8;
 		this.maxMana = 50;
-		this.currentMana = this.maxMana;
+		this.currentMana = 0;//this.maxMana;
 		this.maxHP = 100;
-		this.currentHP = this.maxHP;
+		this.currentHP = 0;//this.maxHP;
 	}
 
 	//Returns the name of the player
@@ -186,22 +186,34 @@ class Player{
 			}));
 			$(`#inventoryItem${i}`).append($('<div>').prop({id: 'count', innerHTML: `${currentItemCount}`,}));
 
-
-			var player = this;
-
-			if(currentItem.getItemType() == "weapon") {
-				$(`#inventoryItem${i}`).click(function () {
-					player.setCurrentWeapon(currentItem);
-				})
-			}
-			else if(currentItem.getItemType() == "potion") {
-
-				$(`#inventoryItem${i}`).click(function () {
-					currentItem.usePotion(player);
-					player.removeInventory(currentItem);
-				})
-			}
 		}
 
+		if (this.inventory.length > 0) {
+
+			this.recursiveDI(this.inventory[0][0], this.inventory, this, 0)
+		}
+
+
+	}
+
+	recursiveDI(currentItem, inventory, player, index) {
+		if(currentItem.getItemType() == "weapon") {
+			$(`#inventoryItem${index}`).click(function () {
+				player.setCurrentWeapon(currentItem);
+			})
+		}
+		else if(currentItem.getItemType() == "potion") {
+
+			$(`#inventoryItem${index}`).click(function () {
+				currentItem.usePotion(player);
+				player.removeInventory(currentItem);
+			})
+		}
+
+		index = index + 1;
+
+		if(index < inventory.length) {
+			this.recursiveDI(inventory[index][0], inventory, player, index)
+		}
 	}
 }
