@@ -22,7 +22,7 @@ var superHealingPotion = new potions("super healing potion", "super healing");
 var superStrengthPotion = new potions("super strength potion", "super strength");
 var superManaPotion = new potions("super mana potion", "super mana");
 
-var currentPlayer = new Player("none");
+var currentPlayer = new Player(localStorage.getItem("playerName"));
 currentPlayer.setCurrentWeapon(defaultWeapon);
 
 //Creating Areas
@@ -45,11 +45,11 @@ var potionMaster = new area("Potion Master's",65,false, 0, false);
 
 
 //enemy possibilities
-var wolf = new Enemy(currentPlayer, "none", false, 10, false);
-var ogre = new Enemy(currentPlayer, "none", false, 20, false);
-var randomEnemy = new Enemy(currentPlayer, "none", false, 0, false);
-var malikai = new Enemy(currentPlayer, "none", false, 30, false);
-var voice = new Enemy(currentPlayer, "none", false, 40, false);
+var wolf = new Enemy(currentPlayer, "none", false, 0.7, false);
+var ogre = new Enemy(currentPlayer, "none", false, 1.2, false);
+var randomEnemy = new Enemy(currentPlayer, "none", 0.5, 0, false);
+var malikai = new Enemy(currentPlayer, "none", false, 0.9, false);
+var voice = new Enemy(currentPlayer, "none", false, 1.0, false);
 var randomEnemyName = "";
 
 var state = {};
@@ -91,19 +91,11 @@ function randomizeCombat(path1, path2, percentage){
 function game(){
     state = {}
 
-    var value = localStorage.getItem("playerName");
-    currentPlayer = new Player(value);
+    //var value = localStorage.getItem("playerName");
+    //currentPlayer = new Player(value);
     currentPlayer.displayStats();
     currentPlayer.displayInventory();
 
-    //delete this later
-    currentPlayer.addInventory(bowArrow);
-    currentPlayer.addInventory(sword);
-    currentPlayer.addInventory(manaPotion);
-    currentPlayer.addInventory(manaPotion);
-    currentPlayer.addInventory(strengthPotion);
-
-    console.log(currentPlayer.getInventory())
     battlefield.displayInfo(battlefield.description);
     battlefield.isVisted = true;
 

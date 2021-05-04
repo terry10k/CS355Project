@@ -8,8 +8,8 @@ function combat(player, enemy){
         $(".prompt").animate({height: '-=100%'}, 2500);
         $(".combatContainer").animate({height: '+=100%'}, 2500);
 
-        $('#combatAttack').attr('disabled','disabled');
-        $('#combatRun').attr('disabled','disabled');
+        //$('#combatAttack').attr('disabled','disabled');
+        //$('#combatRun').attr('disabled','disabled');
 
         var wolfPic = '<img src="../assets/hell-hound-idle.gif" alt="wolfIdle" />';
         $("#combatEnemy").append(wolfPic);
@@ -35,7 +35,7 @@ function battle(player, enemy) {
                 turn = attackEnemy(enemy, enemyMaxHP, turn, player)
         });
 
-        while (enemy.getDeathStatus() == false) {
+        /*while (enemy.getDeathStatus() == false) {
                 if (turn % 2 == 0) {
                         $('#combatAttack').removeAttr('disabled');
                         $('#combatRun').removeAttr('disabled');
@@ -48,7 +48,7 @@ function battle(player, enemy) {
                         turn++;
                 }
 
-        }
+        }*/
 
         console.log("victory")
 

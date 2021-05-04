@@ -18,9 +18,9 @@ class Player{
 		this.name = name;
 		this.baseAttack = 8;
 		this.maxMana = 50;
-		this.currentMana = 0;//this.maxMana;
+		this.currentMana = 50;//this.maxMana;
 		this.maxHP = 100;
-		this.currentHP = 0;//this.maxHP;
+		this.currentHP = 100;//this.maxHP;
 	}
 
 	//Returns the name of the player
