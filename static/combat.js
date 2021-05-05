@@ -8,8 +8,8 @@ function combat(player, enemy, previousArea, nextArea, endScreen){
 
     $('#combatAttack').prop('disabled', false);
     $('#combatRun').prop('disabled', false);
-    $("#combatEnemy").empty()
-    var pic = '<img src="../assets/hell-hound-idle.gif", alt="wolfIdle" />';
+
+    var pic = '<img src="../assets/hell-hound-idle.gif" alt="wolfIdle" />';
     $("#combatEnemy").append(pic);
 
 
@@ -19,7 +19,7 @@ function combat(player, enemy, previousArea, nextArea, endScreen){
 
 function battle(player, enemy, previousArea, nextArea, endScreen) {
     var enemyMaxHP = enemy.getHealth();
-    console.log(enemy)
+
 
     $("#enemyContainer").css("display", "flex");
     $("#combatMenu").css("display", "flex");
@@ -27,10 +27,10 @@ function battle(player, enemy, previousArea, nextArea, endScreen) {
     var prefix = adjectives[Math.floor(Math.random() * adjectives.length)];
     $("#combatPrompt").text(`A ${prefix} ${enemy.getName()} prepares to attack you`);
 
-    var turn = 0;
+
 
     $("#combatAttack").click(function() {
-        turn = attackEnemy(enemy, enemyMaxHP, turn, player, nextArea)
+        attackEnemy(enemy, enemyMaxHP, player, nextArea)
         $('#combatAttack').prop('disabled', true);
         $('#combatRun').prop('disabled', true);
 
@@ -47,9 +47,10 @@ function battle(player, enemy, previousArea, nextArea, endScreen) {
 
 }
 
-function attackEnemy(enemy, enemyMaxHP, turn, player, nextArea){
+function attackEnemy(enemy, enemyMaxHP, player, nextArea){
+    $(`#combatAttack`).off('click');
     enemy.setHealth(enemy.getHealth() - player.getCurrentAttack());
-    $("#combatPrompt").text(`You attacked ${enemy.getName()}, dealing ${player.getCurrentAttack().toFixed()} damage.`);
+    $("#combatPrompt").text(`You attacked ${enemy.getName()}, dealing ${player.getCurrentAttack()} damage.`);
     updateEnemyStats(enemy,enemyMaxHP);
     if (enemy.getHealth() <= 0) {
         enemy.setDeathStatus(true);
@@ -57,7 +58,7 @@ function attackEnemy(enemy, enemyMaxHP, turn, player, nextArea){
     }
     else {
         setTimeout(function () {
-            attackPlayer(player, enemy, nextArea);
+            attackPlayer(player, enemy, nextArea, enemyMaxHP);
         }, 1000);
     }
 
@@ -68,18 +69,27 @@ function updateEnemyStats(enemy, enemyMaxHP) {
     $("#enemyStats").text(`${enemy.getName()}  Health: ${enemy.getHealth()}/${enemyMaxHP}`)
 }
 
-function attackPlayer(player, enemy, endScreen) {
+function attackPlayer(player, enemy, nextArea, enemyMaxHP) {
     player.setCurrentHP(player.getCurrentHP() - enemy.getAttackStrength());
     $("#combatPrompt").text(`${enemy.getName()} attacked ${player.getName()}, dealing ${enemy.getAttackStrength()} damage.`);
     player.displayStats();
     $('#combatAttack').prop('disabled', false);
     $('#combatRun').prop('disabled', false);
     if(player.getCurrentHP <= 0) {
-        endCombat("lose", endScreen); //loss
+        endCombat("lose", nextArea); //loss
     }
+
+    $("#combatAttack").click(function() {
+        attackEnemy(enemy, enemyMaxHP, player, nextArea)
+        $('#combatAttack').prop('disabled', true);
+        $('#combatRun').prop('disabled', true);
+
+    });
 }
 
 function endCombat(outcome, area) {
+    $(`#combatRun`).off('click');
+    $(`#combatAttack`).off('click');
     if(outcome == "win") {
         // go to next area
         showTextNode(area);
@@ -93,8 +103,11 @@ function endCombat(outcome, area) {
         showTextNode(area);
     }
 
+    $("#combatEnemy").empty()
     $("#enemyContainer").css("display", "none");
     $("#combatMenu").css("display", "none");
     $(".prompt").animate({height: '+=100%'}, 2500);
     $(".combatContainer").animate({height: '-=100%'}, 2500);
+
 }
+

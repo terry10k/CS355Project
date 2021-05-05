@@ -4,20 +4,20 @@ const optionButtonsElement = document.getElementById('option-buttons');
 //This is the spot where we will hold the weapon that is currently being used: set at default right now
 var defaultWeapon = new weapon("none",  0, "none", 0);
 var userWeapon = defaultWeapon;
-var sword = new weapon("Sword", 10, "sword", 0);
-var staff = new weapon("Staff", 10, "staff", 1);
-var bowArrow = new weapon("Longbow", 10, "bow & arrow", 0);
-var upgradedSword = new weapon("Longsword", 20, "sword", 0);
-var upgradedBowArrow = new weapon("Reinforced Bow", 20, "bow & arrow", 0);
-var upgradedStaff = new weapon("Staff of Light", 20, "staff", 2);
-var enchantedStaff = new weapon("Sanguine's Staff", 30, "staff", 3);
-var enchantedBowArrow = new weapon("Eldritch Bow", 30, "bow & arrow", 0);
-var enchantedSword = new weapon("Sword of Hate", 30, "sword", 0);
+var sword = new weapon("sword", 10, "sword", 0);
+var staff = new weapon("staff", 10, "staff", 1);
+var bowArrow = new weapon("bow & arrow", 10, "bow & arrow", 0);
+var upgradedSword = new weapon("Level 2 sword", 20, "sword", 0);
+var upgradedBowArrow = new weapon("Level 2 bow & arrow", 20, "bow & arrow", 0);
+var upgradedStaff = new weapon("Level 2 staff", 20, "staff", 2);
+var enchantedStaff = new weapon("Level 3 staff", 30, "staff", 3);
+var enchantedBowArrow = new weapon("Level 3 Bow & Arrow", 30, "bow & arrow", 0);
+var enchantedSword = new weapon("level 3 sword", 30, "sword", 0);
 
 //Creating potions
-var healingPotion = new potions("Healing Potion",  "healing");
-var strengthPotion = new potions("Strength Potion", "strength");
-var manaPotion = new potions("Mana Potion", "mana");
+var healingPotion = new potions("healing potion",  "healing");
+var strengthPotion = new potions("strength potion", "strength");
+var manaPotion = new potions("mana potion", "mana");
 var superHealingPotion = new potions("super healing potion", "super healing");
 var superStrengthPotion = new potions("super strength potion", "super strength");
 var superManaPotion = new potions("super mana potion", "super mana");
@@ -45,13 +45,13 @@ var potionMaster = new area("Potion Master's",65,false, 0, false);
 
 
 //enemy possibilities
-var wolf = new Enemy(currentPlayer, "Wolf", false, 0.7, false);
-var ogre = new Enemy(currentPlayer, "Ogre", false, 1.2, false);
-var randomEnemy = new Enemy(currentPlayer, "none", true, 0.8, false);
-var malikai = new Enemy(currentPlayer, "Malikai", false, 1.2, false);
-var voice = new Enemy(currentPlayer, "none", false, 1.5, false);
-var elf = new Enemy(currentPlayer, "Elf", false, 0.9, false);
-var wizard = new Enemy(currentPlayer, "Wizard", false, 0.6, false);
+var wolf = new Enemy(currentPlayer, "wolf", false, 0.7, false);
+var ogre = new Enemy(currentPlayer, "ogre", false, 1.2, false);
+var randomEnemy = new Enemy(currentPlayer, "wolf", 0.5, 0.7, false);
+var malikai = new Enemy(currentPlayer, "malikai", false, 1.4, false);
+var voice = new Enemy(currentPlayer, "voice", false, 1.5, false);
+var elf = new Enemy(currentPlayer, "elf", false, 0.9, false);
+var wizard = new Enemy(currentPlayer, "wizard", false, 0.6, false);
 
 var state = {};
 
@@ -237,10 +237,13 @@ function selectOption(option){
     }else if(option.nextText == 190){
         combat(currentPlayer, randomEnemy, 44,90,98)
     }else if(option.nextText == 191){
+        randomEnemy = new Enemy(currentPlayer, "wolf", 0.5, 0.7, false); //delet later
         combat(currentPlayer, randomEnemy, 39,91,98);
     }else if(option.nextText == 192){
+        randomEnemy = new Enemy(currentPlayer, "wolf", 0.5, 0.7, false); //delet later
         combat(currentPlayer, randomEnemy, 11,92,98);
     }else if(option.nextText == 193){
+        randomEnemy = new Enemy(currentPlayer, "wolf", 0.5, 0.7, false); //delet later
         combat(currentPlayer, elf, 11,93,98);
     }else if(option.nextText == 194){
         if(village.isVisted){
@@ -369,7 +372,7 @@ const textNodes = [
                 nextText: 109
             },
             {
-                text: 'Longbow',
+                text: 'Bow & Arrow',
                 nextText: 110
             },
         ]
@@ -396,7 +399,7 @@ const textNodes = [
     },
     {
         id: 10,
-        text: `You have chosen the longbow. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
+        text: `You have chosen the bow & arrow. A ways down the road there seems to be what is left of a village. You wonder if there is a possibility that there are still inhabitants. Next to you is the base of your army. Is there possibly any supplies still lying around? Finally you notice what looks like orge tracks leading into the middle of the forest. Those will surely lead you to where you need to go, but do you dare follow them? Which option do you choose?`,
         options: [
             {
                 text: '....',
@@ -1158,8 +1161,8 @@ const textNodes = [
         id: 96,
         text: `Turns out the light you were walking towards led you straight into a trap by the ogres. You have died. Try again?`,
         options: [{
-            text: '...',
-            nextText: 96
+            text: 'Restart Game',
+            nextText: -1
         }
         ]
     },

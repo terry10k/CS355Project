@@ -162,7 +162,7 @@ class Player{
 			if(inventory[i][0].getItemName() == item.getItemName()){
 				return true;
 			}
-		}
+		}$(`#inventoryItem${i}`).off('click');
 		return false;
 	}
 
@@ -183,7 +183,7 @@ class Player{
 		var currentItemCount;
 		for (i = 0; i < 10; i++) {
 			$(`#inventoryItem${i}`).empty();
-			$(`#inventoryItem${i}`).off('click');
+
 
 		}
 
