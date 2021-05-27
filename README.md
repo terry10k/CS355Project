@@ -1,3 +1,3 @@
 # CS355Project
 
-Check onenote for story
+Journey Through Teavra is a text based adventure game built primarily on Javascript and Jquery
